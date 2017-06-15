@@ -56,6 +56,50 @@ form, table {
      padding:0px;
 }
 
+label {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
+
+/* #upload-photo { */
+/*     cursor: inherit; */
+/*     display: block; */
+/*     font-size: 999px; */
+/*     filter: alpha(opacity=0); */
+/*     min-height: 100%; */
+/*     min-width: 100%; */
+/*     opacity: 0; */
+/*     position: absolute; */
+/*     right: 0; */
+/*     text-align: right; */
+/*     top: 0; */
+
+
+/* /*     font-size: 1.25em; */ */
+/* /*     font-weight: 700; */ */
+/* /*     color: white; */ */
+/* /*     background-color: black; */ */
+/* /*     display: inline-block; */ */
+    
+/* /*    opacity: 0; */ */
+/* /*    position: absolute; */ */
+/* /*    z-index: -1; */ */
+   
+/* /* 	position: absolute; */ */
+/* /*     top: 0; */ */
+/* /*     right: 0; */ */
+/* /*     min-width: 100%; */ */
+/* /*     min-height: 100%; */ */
+/* /*     font-size: 100px; */ */
+/* /*     text-align: right; */ */
+/* /*     filter: alpha(opacity=0); */ */
+/* /*     opacity: 0; */ */
+/* /*     outline: none; */ */
+/* /*     background: white; */ */
+/* /*     cursor: inherit; */ */
+/* /*     display: block; */ */
+/* } */
+
 </style>
 </head>
 <body >
@@ -87,8 +131,15 @@ form, table {
 					<div>
 						<form method="POST" enctype="multipart/form-data" action="/">
 							<table>
-								<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-								<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+								<tr><td></td>
+									<td>
+<!-- 										<label for="upload-photo">Browse...</label> -->
+										<input type="file" name="file" id="upload-photo"/>
+									</td>
+								</tr>
+<!-- 								<button class="btn btn-primary btn-sm" id="sendToRoom" onclick="sendtoRoom();">SEND</button> -->
+								<tr> <td></td><td><input type="submit" class="btn btn-info" value="上傳檔案"></td></tr>
+<!-- 								<tr> <td></td><td><input type="submit" value="Upload" /></td></tr> -->
 							</table>
 						</form>
 					</div>					
@@ -106,12 +157,12 @@ form, table {
 <!-- 					<span id="Event"></span><br> -->
 <!-- 					<br> -->
 				</div>		
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<button class="btn btn-primary btn-sm" id="openChat" onclick="Login();">openChat</button>
-				</div>						
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<button class="btn btn-primary btn-sm" id="closeChat" onclick="Logout();">closeChat</button>
-				</div>	
+<!-- 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+<!-- 					<button class="btn btn-primary btn-sm" id="openChat" onclick="Login();">openChat</button> -->
+<!-- 				</div>						 -->
+<!-- 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+<!-- 					<button class="btn btn-primary btn-sm" id="closeChat" onclick="Logout();">closeChat</button> -->
+<!-- 				</div>	 -->
 			</div>	
 		</div>
 		<!-- 鑑賞區 -->
@@ -170,7 +221,12 @@ form, table {
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-heading nopadding">
 			<h3>評分紀錄</h3>
 			</div>
-			<div class="pre-scrollable col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-body left logmaxHeight" id="text">
+			<div class="pre-scrollable col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-body left logmaxHeight" id="historyRatingResult">
+				Here
+				<c:forEach var="ratingHistory" items="${ratingHistoryList}">
+					Access here item if needed <c:out value="${ratingHistory}"/>
+<%-- 					<img src="${item}"> --%>
+				</c:forEach>				
 <!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
 <!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
 <!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->

@@ -3,6 +3,7 @@ package com.spring;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,8 @@ import com.util.Util;
 public class BasicController {
 	
     private final StorageService storageService;
+    
+    private static List<String> ratingHistoryList = new ArrayList<>();
 
     @Autowired
     public BasicController(StorageService storageService) {
@@ -70,9 +73,17 @@ public class BasicController {
 	
 	@RequestMapping("/giveRating")
 //	@ResponseStatus(value = HttpStatus.OK)
-	public String giveRating(Map<String, String> model) {
+	public String giveRating(Map<String, String> model
+							,@RequestParam("giveRatingResult") String giveRatingResult) {
 		System.out.println("giveRating() called");
+		System.out.println("giveRating() input giveRatingResult: " + giveRatingResult);
+		
+		ratingHistoryList.add(giveRatingResult);
+		System.out.println("giveRating() input ratingHistoryList.size(): " + ratingHistoryList.size());
+		System.out.println("giveRating() input ratingHistoryList.toString(): " + ratingHistoryList.toString());
+		
 		model.put("message", "hello");
+//		model.put("ratingHistoryList", ratingHistoryList.toString());
 //		return "rate02"; // 圖片不見
 //		return "/"; // 404
 		return "redirect:/";
@@ -228,6 +239,10 @@ public class BasicController {
                                 .fromMethodName(BasicController.class, "serveFile", path.getFileName().toString())
                                 .build().toString())
                 .collect(Collectors.toList()));
+        
+        /** 加上評分歷史紀錄 **/
+        model.addAttribute("ratingHistoryList", ratingHistoryList.toString());
+        
         Util.getConsoleLogger().info("listUploadedFiles() ends");
         return "rate02";
 //        return "uploadForm";
