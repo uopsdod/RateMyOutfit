@@ -103,7 +103,7 @@ label {
 
 </style>
 </head>
-<body >
+<body onload="onLoad();">
 	<!-- 標題 -->
 	<div class="row no-gutter" style="border-bottom: 1px solid #c0c0c0; width: 100%;"> <!-- width: 100% 讓螢幕寬度符合螢幕大小 -->
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
@@ -189,7 +189,7 @@ label {
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 <!-- 						<img alt="" src="pic02.png"> -->
 <%-- 						<span class="input-xlarge uneditable-input">"${files}"</span> --%>
-						<img id="mainPic">
+						<img id="mainPic" src="whitePic.png" height="240">
 <%-- 						<c:forEach var="item" items="${files}"> --%>
 <%-- 							Access here item if needed <c:out value="${item}"/> --%>
 <%-- 							<img id="innerMainPic" src="${item}"> --%>
@@ -282,6 +282,10 @@ setInterval(function(){
 
 setInterval(function(){ 
 	console.log("check file timer beats");
+	updatePic();
+}, 500);
+
+function updatePic(){
 	$.get("checkIfNewFileUploaded", function(data, status){
 	    console.log("check file Data: " + data + "\nStatus: " + status);
 	    if (currFileName != data){
@@ -289,13 +293,12 @@ setInterval(function(){
 	    	document.getElementById("mainPic").src = currFileName;
 	    }
 	    
-// 	    int serverFileCount = parseInt(data);
-// 	    if (serverFileCount > localFileCount){
-	    	
-// 	    	localFileCount = serverFileCount;
-// 	    }
 	});
-}, 500);
+}
+
+function onLoad(){
+	updatePic();
+}
 
 </script>
 
