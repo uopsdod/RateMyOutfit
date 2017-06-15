@@ -3,12 +3,17 @@ package com.spring;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -55,6 +60,7 @@ public class BasicController {
     private final StorageService storageService;
     
     private static List<String> ratingHistoryList = new ArrayList<>();
+    private static AtomicInteger fileCount = new AtomicInteger();
 
     @Autowired
     public BasicController(StorageService storageService) {
@@ -70,6 +76,41 @@ public class BasicController {
 	public String welcome(Map<String, String> model) {
 		model.put("message", "hello");
 		return "welcome";
+	}
+	
+	@RequestMapping("/checkIfNewFileUploaded")
+	@ResponseBody
+	public String checkIfNewFileUploaded(Model model) {
+		String result = "";
+//		model.put("message", "hello");
+//		model.addAttribute("fileCount", fileCount);
+		Stream<Path> loadAll = storageService.loadAll();
+//		Path lastPath = loadAll.reduce((a, b) -> b).orElse(null);
+		Optional<Path> lastPath = loadAll.findFirst();
+		ResponseEntity<Resource> serveFile = null;
+		if (lastPath != null){
+//			serveFile = this.serveFile(lastPath.getFileName().toString());
+			try{
+				result = MvcUriComponentsBuilder
+						.fromMethodName(BasicController.class, "serveFile", lastPath.get().getFileName().toString())
+//	        .fromMethodName(BasicController.class, "serveFile", lastPath.getFileName().toString())
+						.build().toString();
+			}catch(NoSuchElementException e){
+				Util.getConsoleLogger().info("e.getStackTrace(): " + e.getStackTrace());
+			}
+		}
+		
+//		
+//        .map(path ->
+//                MvcUriComponentsBuilder
+//                        .fromMethodName(BasicController.class, "serveFile", path.getFileName().toString())
+//                        .build().toString())
+//        .collect(Collectors.toList()));
+//		if (serveFile != null && serveFile.getBody() != null){
+//			result = serveFile.getBody().toString();
+//		}
+		return result;
+//		return last.getFileName().toString();
 	}
 	
 	@RequestMapping("/giveRating")
@@ -277,6 +318,7 @@ public class BasicController {
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
+        fileCount.incrementAndGet();
         Util.getConsoleLogger().info("handleFileUpload() ends");
         return "redirect:/";
     }

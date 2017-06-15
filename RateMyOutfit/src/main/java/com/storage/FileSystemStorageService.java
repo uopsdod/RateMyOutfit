@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
+    private String lastFileName = null;
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
@@ -32,8 +33,16 @@ public class FileSystemStorageService implements StorageService {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
 //            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            // 總是把上一個刪掉
+            if (lastFileName != null){
+            	Files.deleteIfExists(this.rootLocation.resolve(lastFileName));
+            }
+            
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()),
             		StandardCopyOption.REPLACE_EXISTING);
+            
+            lastFileName = file.getOriginalFilename();
+            
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }

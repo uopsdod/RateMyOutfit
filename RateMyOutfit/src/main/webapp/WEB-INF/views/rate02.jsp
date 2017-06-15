@@ -189,10 +189,11 @@ label {
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 <!-- 						<img alt="" src="pic02.png"> -->
 <%-- 						<span class="input-xlarge uneditable-input">"${files}"</span> --%>
-						<c:forEach var="item" items="${files}">
+						<img id="mainPic">
+<%-- 						<c:forEach var="item" items="${files}"> --%>
 <%-- 							Access here item if needed <c:out value="${item}"/> --%>
-							<img src="${item}">
-						</c:forEach>
+<%-- 							<img id="innerMainPic" src="${item}"> --%>
+<%-- 						</c:forEach> --%>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 						<form id='formName' name='formName' action="/giveRating">
@@ -255,6 +256,9 @@ label {
 </body>
 
 <script type="text/javascript">
+var localFileCount = -1;
+var currFileName = "";
+
 setInterval(function(){ 
 	console.log("timer beats");
 	$.get("getRatingHistory", function(data, status){
@@ -273,6 +277,23 @@ setInterval(function(){
 		console.log("result: " + result);
 		document.getElementById("historyRatingResult").innerHTML = result;	
 	    
+	});
+}, 500);
+
+setInterval(function(){ 
+	console.log("check file timer beats");
+	$.get("checkIfNewFileUploaded", function(data, status){
+	    console.log("check file Data: " + data + "\nStatus: " + status);
+	    if (currFileName != data){
+	    	currFileName = data;
+	    	document.getElementById("mainPic").src = currFileName;
+	    }
+	    
+// 	    int serverFileCount = parseInt(data);
+// 	    if (serverFileCount > localFileCount){
+	    	
+// 	    	localFileCount = serverFileCount;
+// 	    }
 	});
 }, 500);
 

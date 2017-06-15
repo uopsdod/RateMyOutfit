@@ -525,3 +525,108 @@
 [17/06/16 03:21:49.324][ INFO][com.util.Util                      -54   ] - Util() end
 [17/06/16 03:21:49.917][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
 [17/06/16 03:21:49.918][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:31:27.547][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:31:27.551][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:31:27.552][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:31:28.317][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:31:28.317][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:36:53.801][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:36:53.808][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:36:53.809][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:36:54.929][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:36:54.930][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:43:14.885][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:43:14.889][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:43:14.890][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:43:15.674][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:43:15.674][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:44:46.594][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:44:46.600][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:44:46.600][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:44:47.324][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:44:47.324][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:45:51.458][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:45:51.461][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:45:51.462][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:45:52.719][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:45:52.721][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:47:19.930][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:47:19.933][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:47:19.933][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:47:20.763][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:47:20.767][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:51:03.532][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:51:03.535][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:51:03.535][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:51:04.270][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:51:04.271][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 03:53:47.297][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 03:53:47.302][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 03:53:47.302][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 03:53:48.171][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 03:53:48.171][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:03:33.161][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:03:33.169][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:03:33.169][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:03:35.325][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:03:35.325][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:05:33.179][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:05:33.183][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:05:33.184][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:05:33.785][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:05:33.785][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:06:59.926][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:06:59.930][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:06:59.930][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:07:00.834][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:07:00.835][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:07:27.644][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:07:27.647][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:07:27.647][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:07:28.382][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:07:28.382][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:09:42.954][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:09:42.958][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:09:42.959][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:09:43.812][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:09:43.812][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:11:15.017][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:11:15.020][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:11:15.020][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:11:15.809][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:11:15.810][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:12:57.607][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:12:57.610][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:12:57.610][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:12:58.317][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:12:58.318][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:16:49.361][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:16:49.364][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:16:49.365][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:16:50.073][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:16:50.073][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:17:34.541][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:17:34.544][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:17:34.545][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:17:35.382][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:17:35.382][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:20:16.785][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:20:16.788][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:20:16.788][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:20:17.556][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:20:17.557][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:22:13.073][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:22:13.076][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:22:13.077][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:22:13.710][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:22:13.712][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:23:25.779][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:23:25.802][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:23:25.803][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:23:27.044][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:23:27.045][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/06/16 04:28:14.296][ INFO][com.util.Util                      -49   ] - Util() start
+[17/06/16 04:28:14.299][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/06/16 04:28:14.300][ INFO][com.util.Util                      -54   ] - Util() end
+[17/06/16 04:28:14.867][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/06/16 04:28:14.868][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
