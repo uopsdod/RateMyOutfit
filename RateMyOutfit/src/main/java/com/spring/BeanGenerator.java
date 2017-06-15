@@ -8,11 +8,14 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -85,5 +88,23 @@ public class BeanGenerator {
 		Util.getConsoleLogger().info("BeanGenerator - mapProp: " + mapProp);
 		return util;
 	}
+	
+	private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
+	
+//    @Bean
+//    public CommonsMultipartResolver commonsMultipartResolver() {
+//        final CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+//        commonsMultipartResolver.setMaxUploadSize(-1);
+//        return commonsMultipartResolver;
+//    }
+//
+//    @Bean
+//    public FilterRegistrationBean multipartFilterRegistrationBean() {
+//        final MultipartFilter multipartFilter = new MultipartFilter();
+//        final FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(multipartFilter);
+//        filterRegistrationBean.addInitParameter("multipartResolverBeanName", "commonsMultipartResolver");
+//        return filterRegistrationBean;
+//    }
+	
 	
 }
