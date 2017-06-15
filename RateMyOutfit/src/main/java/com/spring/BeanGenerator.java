@@ -1,5 +1,6 @@
 package com.spring;
 
+
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -7,7 +8,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +24,15 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.bean.VersionBean;
 import com.google.gson.Gson;
+import com.storage.StorageProperties;
+import com.storage.StorageService;
 import com.util.Util;
 
 @Configuration
 @EnableMBeanExport(defaultDomain="${projectName}")
 @PropertySource("classpath:application.properties")
 @ConfigurationProperties
+@EnableConfigurationProperties(StorageProperties.class)
 public class BeanGenerator {
 	
 	private Map<String, String> mapProp;
@@ -105,6 +111,14 @@ public class BeanGenerator {
 //        filterRegistrationBean.addInitParameter("multipartResolverBeanName", "commonsMultipartResolver");
 //        return filterRegistrationBean;
 //    }
+
 	
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+            storageService.deleteAll();
+            storageService.init();
+		};
+	}
 	
 }

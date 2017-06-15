@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -80,6 +80,15 @@
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">	
 					<b>上傳圖片</b>:<br>
+					<div>
+						<form method="POST" enctype="multipart/form-data" action="/">
+							<table>
+								<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+								<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+							</table>
+						</form>
+					</div>					
+					
 					<span id="UserID"></span><br> 
 <!-- 					<b>Status:</b><br> -->
 <!-- 					<span id="Status"></span><br> -->
@@ -122,7 +131,12 @@
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-body left chatmaxHeight" id="ratingArea">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
-						<img alt="" src="pic02.png">
+<!-- 						<img alt="" src="pic02.png"> -->
+<%-- 						<span class="input-xlarge uneditable-input">"${files}"</span> --%>
+						<c:forEach var="item" items="${files}">
+<%-- 							Access here item if needed <c:out value="${item}"/> --%>
+							<img src="${item}">
+						</c:forEach>
 					</div>
 				</div>
 			</div> <!-- end of container -->
