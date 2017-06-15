@@ -25,6 +25,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -64,6 +66,16 @@ public class BasicController {
 	public String welcome(Map<String, String> model) {
 		model.put("message", "hello");
 		return "welcome";
+	}
+	
+	@RequestMapping("/giveRating")
+//	@ResponseStatus(value = HttpStatus.OK)
+	public String giveRating(Map<String, String> model) {
+		System.out.println("giveRating() called");
+		model.put("message", "hello");
+//		return "rate02"; // 圖片不見
+//		return "/"; // 404
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/rate01", method = RequestMethod.GET)

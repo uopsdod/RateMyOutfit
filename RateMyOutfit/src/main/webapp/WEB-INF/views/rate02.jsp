@@ -50,7 +50,11 @@
 {
 	visibility: hidden;
 }
-
+form, table {
+     display:inline;
+     margin:0px;
+     padding:0px;
+}
 
 </style>
 </head>
@@ -137,6 +141,24 @@
 <%-- 							Access here item if needed <c:out value="${item}"/> --%>
 							<img src="${item}">
 						</c:forEach>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
+						<form id='formName' name='formName' action="/giveRating">
+					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='good'>
+					        <input type="image" name="submit" src="good.png" border="0" alt="Submit" width="84" height="84"/>
+						</form> 						
+						<form id='formName' name='formName' action="/giveRating">
+					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='nerdy'>
+					        <input type="image" name="submit" src="nerdy.png" border="0" alt="Submit" width="84" height="84"/>
+						</form> 
+
+						
+<!-- 						<form method="POST" action="/giveRating"> -->
+<!-- 							<table> -->
+<!-- 								<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr> -->
+<!-- 								<tr><td></td><td><input type="submit" value="Upload" /></td></tr> -->
+<!-- 							</table> -->
+<!-- 						</form> -->
 					</div>
 				</div>
 			</div> <!-- end of container -->
