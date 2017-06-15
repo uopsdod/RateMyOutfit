@@ -195,11 +195,11 @@ label {
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='good'>
+					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='讚'>
 					        <input type="image" name="submit" src="good.png" border="0" alt="Submit" width="84" height="84"/>
 						</form> 						
 						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='nerdy'>
+					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='宅'>
 					        <input type="image" name="submit" src="nerdy.png" border="0" alt="Submit" width="84" height="84"/>
 						</form> 
 
@@ -222,9 +222,10 @@ label {
 			<h3>評分紀錄</h3>
 			</div>
 			<div class="pre-scrollable col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-body left logmaxHeight" id="historyRatingResult">
-				Here
+<!-- 				Here -->
 				<c:forEach var="ratingHistory" items="${ratingHistoryList}">
-					Access here item if needed <c:out value="${ratingHistory}"/>
+<%-- 					Access here item if needed <c:out value="${ratingHistory}"/> --%>
+					<c:out value="${ratingHistory}"/><br>
 <%-- 					<img src="${item}"> --%>
 				</c:forEach>				
 <!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->

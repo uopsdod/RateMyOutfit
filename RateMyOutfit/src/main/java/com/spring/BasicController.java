@@ -241,7 +241,9 @@ public class BasicController {
                 .collect(Collectors.toList()));
         
         /** 加上評分歷史紀錄 **/
-        model.addAttribute("ratingHistoryList", ratingHistoryList.toString());
+        String ratingHistoryListResult = ratingHistoryList.toString().substring(1, ratingHistoryList.toString().length()-1);
+        System.out.println("listUploadedFiles() input ratingHistoryListResult: " + ratingHistoryListResult);
+        model.addAttribute("ratingHistoryList", ratingHistoryListResult);
         
         Util.getConsoleLogger().info("listUploadedFiles() ends");
         return "rate02";
