@@ -138,7 +138,7 @@ label {
 									</td>
 								</tr>
 <!-- 								<button class="btn btn-primary btn-sm" id="sendToRoom" onclick="sendtoRoom();">SEND</button> -->
-								<tr> <td></td><td><input type="submit" class="btn btn-info" value="上傳檔案"></td></tr>
+								<tr> <td></td><td><input type="submit" class="btn btn-info" value="確定上傳"></td></tr>
 <!-- 								<tr> <td></td><td><input type="submit" value="Upload" /></td></tr> -->
 							</table>
 						</form>
