@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -240,10 +241,12 @@ public class BasicController {
                                 .build().toString())
                 .collect(Collectors.toList()));
         
-        /** 加上評分歷史紀錄 **/
-        String ratingHistoryListResult = ratingHistoryList.toString().substring(1, ratingHistoryList.toString().length()-1);
-        System.out.println("listUploadedFiles() input ratingHistoryListResult: " + ratingHistoryListResult);
-        model.addAttribute("ratingHistoryList", ratingHistoryListResult);
+        /** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
+        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
+        Collections.reverse(tmpRatingHistoryList);
+        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
+        System.out.println("listUploadedFiles() input RatingHistoryListResult: " + RatingHistoryListResult);
+        model.addAttribute("ratingHistoryList", RatingHistoryListResult); // "ratingHistoryList" 關聯前端，謹慎更動
         
         Util.getConsoleLogger().info("listUploadedFiles() ends");
         return "rate02";
@@ -284,6 +287,18 @@ public class BasicController {
     	Util.getConsoleLogger().info("handleStorageFileNotFound() ends");
     	
         return ResponseEntity.notFound().build();
+    }
+    
+    @RequestMapping(value="/getRatingHistory", method=RequestMethod.GET)
+    @ResponseBody
+    public String foo() {
+        /** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
+        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
+        Collections.reverse(tmpRatingHistoryList);
+        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
+        System.out.println("listUploadedFiles() input RatingHistoryListResult: " + RatingHistoryListResult);
+    	
+        return RatingHistoryListResult;
     }
 
 }

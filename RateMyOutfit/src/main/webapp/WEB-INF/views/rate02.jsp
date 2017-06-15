@@ -8,7 +8,8 @@
 <meta http-equiv="expires" content="0">
 <title>Rate My Outfit</title>
 <!-- bootstrap v3.3.6 -->
-<script src="js/jquery.min.js"></script>
+<!-- <script src="js/jquery.min.js"></script> -->
+<script src="js/jquery-3.2.1.js"></script>
 <link href="boostrap/bootstrap.css" rel="stylesheet" />
 <link href="boostrap/bootstrap-theme.css" rel="stylesheet" />
 <script src="boostrap/bootstrap.js"></script>
@@ -195,14 +196,26 @@ label {
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='讚'>
-					        <input type="image" name="submit" src="good.png" border="0" alt="Submit" width="84" height="84"/>
-						</form> 						
+					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='可以去死一死了'>
+					        <input type="image" name="submit" src="go_die.png" border="0" alt="Submit" width="84" height="84"/>
+						</form> 
+						<form id='formName' name='formName' action="/giveRating">
+					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='看見鬼'>
+					        <input type="image" name="submit" src="ghost.png" border="0" alt="Submit" width="84" height="84"/>
+						</form> 
+						<form id='formName' name='formName' action="/giveRating">
+					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='慘'>
+					        <input type="image" name="submit" src="misery.png" border="0" alt="Submit" width="84" height="84"/>
+						</form>
 						<form id='formName' name='formName' action="/giveRating">
 					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='宅'>
 					        <input type="image" name="submit" src="nerdy.png" border="0" alt="Submit" width="84" height="84"/>
 						</form> 
-
+						<form id='formName' name='formName' action="/giveRating">
+					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='讚'>
+					        <input type="image" name="submit" src="good.png" border="0" alt="Submit" width="84" height="84"/>
+						</form> 						
+						
 						
 <!-- 						<form method="POST" action="/giveRating"> -->
 <!-- 							<table> -->
@@ -240,4 +253,29 @@ label {
 		</div>
 	</div> <!-- end of row -->
 </body>
+
+<script type="text/javascript">
+setInterval(function(){ 
+	console.log("timer beats");
+	$.get("getRatingHistory", function(data, status){
+	    console.log("Data: " + data + "\nStatus: " + status);
+	    var ratingHistoryList = data.split(",");
+	    var i;
+	    var result = "";
+		for (i = 0; i < ratingHistoryList.length; i++) {
+			console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
+			console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
+			
+			result += ratingHistoryList[i].trim() + "<br>";
+// 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
+// 		                                                                 = "visible";
+		}
+		console.log("result: " + result);
+		document.getElementById("historyRatingResult").innerHTML = result;	
+	    
+	});
+}, 1000);
+
+</script>
+
 </html>
