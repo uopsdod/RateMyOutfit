@@ -274,7 +274,7 @@ setInterval(function(){
 		document.getElementById("historyRatingResult").innerHTML = result;	
 	    
 	});
-}, 1000);
+}, 500);
 
 </script>
 
