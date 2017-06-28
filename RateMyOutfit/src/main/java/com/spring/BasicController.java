@@ -54,22 +54,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bean.Greeting;
 import com.bean.HelloMessage;
+import com.google.gson.JsonObject;
 import com.storage.StorageFileNotFoundException;
 import com.storage.StorageService;
 import com.util.Util;
+import com.util.UtilWebOSocketMsgBroker;
 
 @Controller
 public class BasicController {
 	
     private final StorageService storageService;
+    private UtilWebOSocketMsgBroker utilWebOSocketMsgBroker;
     
     private static List<String> ratingHistoryList = new ArrayList<>();
     private static AtomicInteger fileCount = new AtomicInteger();
 
     @Autowired
-    public BasicController(StorageService storageService) {
+    public BasicController(StorageService storageService, UtilWebOSocketMsgBroker utilWebOSocketMsgBroker) {
     	System.out.println("BasicController() called");
         this.storageService = storageService;
+        this.utilWebOSocketMsgBroker = utilWebOSocketMsgBroker;
     }
     
 //	public BasicController(){
@@ -127,6 +131,7 @@ public class BasicController {
 		ratingHistoryList.add(giveRatingResult);
 		System.out.println("giveRating() input ratingHistoryList.size(): " + ratingHistoryList.size());
 		System.out.println("giveRating() input ratingHistoryList.toString(): " + ratingHistoryList.toString());
+		
 		
 		model.put("message", "hello");
 //		model.put("ratingHistoryList", ratingHistoryList.toString());
@@ -361,8 +366,39 @@ public class BasicController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
+    	System.out.println("greeting starts");
         Thread.sleep(1000); // simulated delay
         return new Greeting("Hello, " + message.getName() + "!");
     }
+    
+    @MessageMapping("/triggerRatingHistoryBroadcast")
+    @SendTo(UtilWebOSocketMsgBroker.TOPIC + UtilWebOSocketMsgBroker.CHANNEL_ratingHistory)
+    public String ratingHistory(String aMsg) throws Exception {
+    	System.out.println("ratingHistory starts");
+    	System.out.println("ratingHistory input aMsg: " + aMsg);
+    	
+    	JsonObject msgJsonObj = Util.getGJsonObject(aMsg);
+    	String ratingResult = Util.getGString(msgJsonObj, "ratingResult");
+    	Util.getConsoleLogger().info("ratingHistory ratingResult: " + ratingResult);
+    	
+    	ratingHistoryList.add(ratingResult);
+    	
+        /** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
+        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
+        Collections.reverse(tmpRatingHistoryList);
+        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
+        System.out.println("ratingHistory() input RatingHistoryListResult: " + RatingHistoryListResult);
+        
+     // test
+//        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_ratingHistory, "testMsg");
+        
+        return RatingHistoryListResult;
+//    	
+//    	
+//        Thread.sleep(1000); // simulated delay
+//        return new Greeting("Hello, " + message.getName() + "!");
+    }
+    
+    
 
 }

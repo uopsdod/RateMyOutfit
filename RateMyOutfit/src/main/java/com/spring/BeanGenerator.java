@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.ViewResolver;
@@ -27,6 +28,7 @@ import com.google.gson.Gson;
 import com.storage.StorageProperties;
 import com.storage.StorageService;
 import com.util.Util;
+import com.util.UtilWebOSocketMsgBroker;;
 
 @Configuration
 @EnableMBeanExport(defaultDomain="${projectName}")
@@ -119,6 +121,12 @@ public class BeanGenerator {
             storageService.deleteAll();
             storageService.init();
 		};
+	}
+	
+	@Bean
+	UtilWebOSocketMsgBroker UtilWebOSocketMsgBroker(SimpMessagingTemplate aTemplate) {
+		UtilWebOSocketMsgBroker utilWebOSocketMsgBroker = new UtilWebOSocketMsgBroker(aTemplate);
+		return utilWebOSocketMsgBroker;
 	}
 	
 }

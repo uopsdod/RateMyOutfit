@@ -9,11 +9,17 @@
 <title>Rate My Outfit</title>
 <!-- bootstrap v3.3.6 -->
 <!-- <script src="js/jquery.min.js"></script> -->
-<script src="js/jquery-3.2.1.js"></script>
+<!-- <script src="js/jquery-3.2.1.js"></script> -->
+<script src="/webjars/jquery/jquery.min.js"></script>
 <link href="boostrap/bootstrap.css" rel="stylesheet" />
 <link href="boostrap/bootstrap-theme.css" rel="stylesheet" />
 <script src="boostrap/bootstrap.js"></script>
 
+<!-- <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+<script src="js/main.js"></script>
 </script>
 
 <style>
@@ -197,25 +203,30 @@ label {
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='可以去死一死了'>
-					        <input type="image" name="submit" src="go_die.png" border="0" alt="Submit" width="84" height="84"/>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="go_die.png" border="0" alt="Submit" width="84" height="84" value="可以去死一死了"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="ghost.png" border="0" alt="Submit" width="84" height="84" value="看見鬼"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="misery.png" border="0" alt="Submit" width="84" height="84" value="慘"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="nerdy.png" border="0" alt="Submit" width="84" height="84" value="宅'"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="good.png" border="0" alt="Submit" width="84" height="84" value="讚"></button>
+<!-- 					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='可以去死一死了'> -->
+<!-- 					        <input type="image" name="submit" src="go_die.png" border="0" alt="Submit" width="84" height="84"/> -->
 						</form> 
-						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='看見鬼'>
-					        <input type="image" name="submit" src="ghost.png" border="0" alt="Submit" width="84" height="84"/>
-						</form> 
-						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='慘'>
-					        <input type="image" name="submit" src="misery.png" border="0" alt="Submit" width="84" height="84"/>
-						</form>
-						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='宅'>
-					        <input type="image" name="submit" src="nerdy.png" border="0" alt="Submit" width="84" height="84"/>
-						</form> 
-						<form id='formName' name='formName' action="/giveRating">
-					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='讚'>
-					        <input type="image" name="submit" src="good.png" border="0" alt="Submit" width="84" height="84"/>
-						</form> 						
+<!-- 						<form id='formName' name='formName' action="/giveRating"> -->
+<!-- 					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='看見鬼'> -->
+<!-- 					        <input type="image" name="submit" src="ghost.png" border="0" alt="Submit" width="84" height="84"/> -->
+<!-- 						</form>  -->
+<!-- 						<form id='formName' name='formName' action="/giveRating"> -->
+<!-- 					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='慘'> -->
+<!-- 					        <input type="image" name="submit" src="misery.png" border="0" alt="Submit" width="84" height="84"/> -->
+<!-- 						</form> -->
+<!-- 						<form id='formName' name='formName' action="/giveRating"> -->
+<!-- 					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='宅'> -->
+<!-- 					        <input type="image" name="submit" src="nerdy.png" border="0" alt="Submit" width="84" height="84"/> -->
+<!-- 						</form>  -->
+<!-- 						<form id='formName' name='formName' action="/giveRating"> -->
+<!-- 					        <input type='hidden' id='giveRatingResult01' name='giveRatingResult' value='讚'> -->
+<!-- 					        <input type="image" name="submit" src="good.png" border="0" alt="Submit" width="84" height="84"/> -->
+<!-- 						</form> 						 -->
 						
 						
 <!-- 						<form method="POST" action="/giveRating"> -->
@@ -253,51 +264,65 @@ label {
 			</div>
 		</div>
 	</div> <!-- end of row -->
+	
+	
+<!-- 	<form class="form-inline"> -->
+<!-- 	    <div class="form-group"> -->
+<!-- 	        <label for="connect">WebSocket connection:</label> -->
+<!-- 	        <button id="connect" class="btn btn-default" type="submit">Connect</button> -->
+<!-- 	        <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect -->
+<!-- 	        </button> -->
+<!-- 	    </div> -->
+<!-- 	</form> -->
 </body>
 
 <script type="text/javascript">
 var localFileCount = -1;
 var currFileName = "";
 
-setInterval(function(){ 
-	console.log("timer beats");
-	$.get("getRatingHistory", function(data, status){
-	    console.log("Data: " + data + "\nStatus: " + status);
-	    var ratingHistoryList = data.split(",");
-	    var i;
-	    var result = "";
-		for (i = 0; i < ratingHistoryList.length; i++) {
-			console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
-			console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
+// setInterval(function(){ 
+// 	console.log("timer beats");
+// 	/** 跟server要ratingHistory資訊 **/
+	
+	
+// 	$.get("getRatingHistory", function(data, status){
+// 	    console.log("Data: " + data + "\nStatus: " + status);
+// 	    var ratingHistoryList = data.split(",");
+// 	    var i;
+// 	    var result = "";
+// 		for (i = 0; i < ratingHistoryList.length; i++) {
+// 			console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
+// 			console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
 			
-			result += ratingHistoryList[i].trim() + "<br>";
-// 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
-// 		                                                                 = "visible";
-		}
-		console.log("result: " + result);
-		document.getElementById("historyRatingResult").innerHTML = result;	
+// 			result += ratingHistoryList[i].trim() + "<br>";
+// // 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
+// // 		                                                                 = "visible";
+// 		}
+// 		console.log("result: " + result);
+// 		document.getElementById("historyRatingResult").innerHTML = result;	
 	    
-	});
-}, 500);
+// 	});
+// }, 500);
 
-setInterval(function(){ 
-	console.log("check file timer beats");
-	updatePic();
-}, 500);
+// setInterval(function(){ 
+// 	console.log("check file timer beats");
+// 	updatePic();
+// }, 500);
 
-function updatePic(){
-	$.get("checkIfNewFileUploaded", function(data, status){
-	    console.log("check file Data: " + data + "\nStatus: " + status);
-	    if (currFileName != data){
-	    	currFileName = data;
-	    	document.getElementById("mainPic").src = currFileName;
-	    }
+// function updatePic(){
+// 	$.get("checkIfNewFileUploaded", function(data, status){
+// 	    console.log("check file Data: " + data + "\nStatus: " + status);
+// 	    if (currFileName != data){
+// 	    	currFileName = data;
+// 	    	document.getElementById("mainPic").src = currFileName;
+// 	    }
 	    
-	});
-}
+// 	});
+// }
+
 
 function onLoad(){
-	updatePic();
+// 	updatePic();
 }
 
 </script>
