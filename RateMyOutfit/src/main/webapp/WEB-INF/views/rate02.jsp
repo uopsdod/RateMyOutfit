@@ -136,7 +136,7 @@ label {
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">	
 					<b>上傳圖片</b>:<br>
 					<div>
-						<form method="POST" enctype="multipart/form-data" action="/">
+						<form id="formUploadFile" method="POST" enctype="multipart/form-data" action="/">
 							<table>
 								<tr><td></td>
 									<td>
@@ -202,7 +202,7 @@ label {
 <%-- 						</c:forEach> --%>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
-						<form id='formName' name='formName' action="/giveRating">
+						<form id='formRatingHistory' name='formName' action="/giveRating">
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="go_die.png" border="0" alt="Submit" width="84" height="84" value="可以去死一死了"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="ghost.png" border="0" alt="Submit" width="84" height="84" value="看見鬼"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="misery.png" border="0" alt="Submit" width="84" height="84" value="慘"></button>
@@ -277,8 +277,8 @@ label {
 </body>
 
 <script type="text/javascript">
-var localFileCount = -1;
-var currFileName = "";
+// var localFileCount = -1;
+// var currFileName = "";
 
 // setInterval(function(){ 
 // 	console.log("timer beats");

@@ -24,4 +24,5 @@ public class UtilWebOSocketMsgBroker {
 	public static final String ENDPOINT = "/gs-guide-websocket";
 	
 	public static final String CHANNEL_ratingHistory = "/ratingHistory";
+	public static final String CHANNEL_fileUploaded = "/fileUploaded";
 }

@@ -323,11 +323,39 @@ public class BasicController {
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
+    	/** 將file存入 **/
     	Util.getConsoleLogger().info("handleFileUpload() starts");
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
         fileCount.incrementAndGet();
+        
+        Util.getConsoleLogger().info("handleFileUpload() here02");
+        
+        /** 通知前端要更新畫面 **/
+		String result = "";
+//		model.put("message", "hello");
+//		model.addAttribute("fileCount", fileCount);
+		Stream<Path> loadAll = storageService.loadAll();
+//		Path lastPath = loadAll.reduce((a, b) -> b).orElse(null);
+		Optional<Path> lastPath = loadAll.findFirst();
+		ResponseEntity<Resource> serveFile = null;
+		if (lastPath != null){
+//			serveFile = this.serveFile(lastPath.getFileName().toString());
+			try{
+				result = MvcUriComponentsBuilder
+						.fromMethodName(BasicController.class, "serveFile", lastPath.get().getFileName().toString())
+//	        .fromMethodName(BasicController.class, "serveFile", lastPath.getFileName().toString())
+						.build().toString();
+			}catch(NoSuchElementException e){
+				Util.getConsoleLogger().info("e.getStackTrace(): " + e.getStackTrace());
+			}
+		}
+		Util.getConsoleLogger().info("handleFileUpload() result333: " + result);
+        
+		this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_fileUploaded, result);
+        
+        
         Util.getConsoleLogger().info("handleFileUpload() ends");
         return "redirect:/";
     }
@@ -393,11 +421,25 @@ public class BasicController {
 //        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_ratingHistory, "testMsg");
         
         return RatingHistoryListResult;
-//    	
-//    	
-//        Thread.sleep(1000); // simulated delay
-//        return new Greeting("Hello, " + message.getName() + "!");
     }
+    
+    
+//    @MessageMapping("/triggerNewFileUploaded")
+//    @SendTo(UtilWebOSocketMsgBroker.TOPIC + UtilWebOSocketMsgBroker.CHANNEL_fileUploaded)
+//    public String fileUploaded(String aMsg) throws Exception {
+//    	System.out.println("fileUploaded starts");
+//    	System.out.println("fileUploaded input aMsg: " + aMsg);
+//    	
+//    	JsonObject msgJsonObj = Util.getGJsonObject(aMsg);
+//    	String ratingResult = Util.getGString(msgJsonObj, "ratingResult");
+//    	Util.getConsoleLogger().info("fileUploaded ratingResult: " + ratingResult);
+//        
+//     // test
+////        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_ratingHistory, "testMsg");
+//        
+//        return RatingHistoryListResult;
+//    }
+    
     
     
 
