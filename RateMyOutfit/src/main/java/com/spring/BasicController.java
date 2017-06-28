@@ -34,6 +34,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bean.Greeting;
+import com.bean.HelloMessage;
 import com.storage.StorageFileNotFoundException;
 import com.storage.StorageService;
 import com.util.Util;
@@ -72,11 +76,11 @@ public class BasicController {
 //		System.out.println("BasicController() called");
 //	}
 
-	@RequestMapping("/")
-	public String welcome(Map<String, String> model) {
-		model.put("message", "hello");
-		return "welcome";
-	}
+//	@RequestMapping("/")
+//	public String welcome(Map<String, String> model) {
+//		model.put("message", "hello");
+//		return "welcome";
+//	}
 	
 	@RequestMapping("/checkIfNewFileUploaded")
 	@ResponseBody
@@ -341,6 +345,24 @@ public class BasicController {
         System.out.println("listUploadedFiles() input RatingHistoryListResult: " + RatingHistoryListResult);
     	
         return RatingHistoryListResult;
+    }
+    
+    @RequestMapping(value = "/stompTest", method = RequestMethod.GET)
+	public String stompTest(	        
+			Map<String, String> model,
+	        HttpServletRequest request, 
+	        HttpServletResponse response) throws IOException, ServletException {
+		Util.getConsoleLogger().info("stompTest() starts");
+		Util.getConsoleLogger().info("stompTest() ends");
+		return "stompTest";
+	}
+    
+    
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public Greeting greeting(HelloMessage message) throws Exception {
+        Thread.sleep(1000); // simulated delay
+        return new Greeting("Hello, " + message.getName() + "!");
     }
 
 }
