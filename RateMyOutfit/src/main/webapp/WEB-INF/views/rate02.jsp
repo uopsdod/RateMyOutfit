@@ -206,8 +206,11 @@ label {
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="go_die.png" border="0" alt="Submit" width="84" height="84" value="可以去死一死了"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="ghost.png" border="0" alt="Submit" width="84" height="84" value="看見鬼"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="misery.png" border="0" alt="Submit" width="84" height="84" value="慘"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="nerdy.png" border="0" alt="Submit" width="84" height="84" value="宅'"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="nerdy.png" border="0" alt="Submit" width="84" height="84" value="宅"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="good.png" border="0" alt="Submit" width="84" height="84" value="讚"></button>
+					        
+					        <!-- test -->
+<!-- 					        <input id="initTest" type="button" value="init"></button> -->
 <!-- 					        <input type='hidden' id='giveRatingResult02' name='giveRatingResult' value='可以去死一死了'> -->
 <!-- 					        <input type="image" name="submit" src="go_die.png" border="0" alt="Submit" width="84" height="84"/> -->
 						</form> 

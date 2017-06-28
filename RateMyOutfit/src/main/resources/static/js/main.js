@@ -34,7 +34,18 @@ function connect() {
         	
 //            showGreeting(JSON.parse(data.body).content);
         });
+        
+        // 檢查是否有要更新資訊  (觸發init)
+        triggerInit();
+        
     });
+    
+    
+}
+
+function triggerInit() {
+	console.log("triggerInit");
+	stompClient.send("/app/triggerInit", {}, JSON.stringify({'triggerInit': 'triggerInitText'}));
 }
 
 function triggerRatingHistoryBroadcast(aRatingResult) {
@@ -62,9 +73,12 @@ function updateRatingHistoryPage(ratingResult){
 
 function updateProfilePage(picUrl){
 //    console.log("check file Data: " + data + "\nStatus: " + status);
+	console.log("updateProfilePage - currFileName: " + currFileName);
+	console.log("updateProfilePage - picUrl: " + picUrl);
     if (currFileName != picUrl){
     	currFileName = picUrl;
     	document.getElementById("mainPic").src = picUrl;
+    	console.log("updateProfilePage - updated mainPic");
     }
 }
 
@@ -114,6 +128,8 @@ $(function () {
 //    	var contents = $('#contents')[0];
     	triggerRatingHistoryBroadcast(this.value); 
     });
+    
+//    $( "#initTest" ).click(function() { triggerInit(); });
     
 //    $( "#connect" ).click(function() { connect(); });
 //    $( "#disconnect" ).click(function() { disconnect(); });

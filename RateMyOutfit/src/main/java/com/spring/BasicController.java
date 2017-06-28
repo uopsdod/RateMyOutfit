@@ -58,6 +58,7 @@ import com.google.gson.JsonObject;
 import com.storage.StorageFileNotFoundException;
 import com.storage.StorageService;
 import com.util.Util;
+import com.util.UtilUploadFile;
 import com.util.UtilWebOSocketMsgBroker;
 
 @Controller
@@ -65,15 +66,17 @@ public class BasicController {
 	
     private final StorageService storageService;
     private UtilWebOSocketMsgBroker utilWebOSocketMsgBroker;
+    private UtilUploadFile utilUploadFile;
     
     private static List<String> ratingHistoryList = new ArrayList<>();
     private static AtomicInteger fileCount = new AtomicInteger();
 
     @Autowired
-    public BasicController(StorageService storageService, UtilWebOSocketMsgBroker utilWebOSocketMsgBroker) {
+    public BasicController(StorageService storageService, UtilWebOSocketMsgBroker utilWebOSocketMsgBroker, UtilUploadFile utilUploadFile) {
     	System.out.println("BasicController() called");
         this.storageService = storageService;
         this.utilWebOSocketMsgBroker = utilWebOSocketMsgBroker;
+        this.utilUploadFile = utilUploadFile;
     }
     
 //	public BasicController(){
@@ -299,6 +302,7 @@ public class BasicController {
         model.addAttribute("ratingHistoryList", RatingHistoryListResult); // "ratingHistoryList" 關聯前端，謹慎更動
         
         Util.getConsoleLogger().info("listUploadedFiles() ends");
+        
         return "rate02";
 //        return "uploadForm";
     }
@@ -333,24 +337,25 @@ public class BasicController {
         Util.getConsoleLogger().info("handleFileUpload() here02");
         
         /** 通知前端要更新畫面 **/
-		String result = "";
-//		model.put("message", "hello");
-//		model.addAttribute("fileCount", fileCount);
-		Stream<Path> loadAll = storageService.loadAll();
-//		Path lastPath = loadAll.reduce((a, b) -> b).orElse(null);
-		Optional<Path> lastPath = loadAll.findFirst();
-		ResponseEntity<Resource> serveFile = null;
-		if (lastPath != null){
-//			serveFile = this.serveFile(lastPath.getFileName().toString());
-			try{
-				result = MvcUriComponentsBuilder
-						.fromMethodName(BasicController.class, "serveFile", lastPath.get().getFileName().toString())
-//	        .fromMethodName(BasicController.class, "serveFile", lastPath.getFileName().toString())
-						.build().toString();
-			}catch(NoSuchElementException e){
-				Util.getConsoleLogger().info("e.getStackTrace(): " + e.getStackTrace());
-			}
-		}
+		String result = this.utilUploadFile.getResult();
+		UtilUploadFile.lastFileUrl = result;
+////		model.put("message", "hello");
+////		model.addAttribute("fileCount", fileCount);
+//		Stream<Path> loadAll = storageService.loadAll();
+////		Path lastPath = loadAll.reduce((a, b) -> b).orElse(null);
+//		Optional<Path> lastPath = loadAll.findFirst();
+//		ResponseEntity<Resource> serveFile = null;
+//		if (lastPath != null){
+////			serveFile = this.serveFile(lastPath.getFileName().toString());
+//			try{
+//				result = MvcUriComponentsBuilder
+//						.fromMethodName(BasicController.class, "serveFile", lastPath.get().getFileName().toString())
+////	        .fromMethodName(BasicController.class, "serveFile", lastPath.getFileName().toString())
+//						.build().toString();
+//			}catch(NoSuchElementException e){
+//				Util.getConsoleLogger().info("e.getStackTrace(): " + e.getStackTrace());
+//			}
+//		}
 		Util.getConsoleLogger().info("handleFileUpload() result333: " + result);
         
 		this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_fileUploaded, result);
@@ -402,8 +407,8 @@ public class BasicController {
     @MessageMapping("/triggerRatingHistoryBroadcast")
     @SendTo(UtilWebOSocketMsgBroker.TOPIC + UtilWebOSocketMsgBroker.CHANNEL_ratingHistory)
     public String ratingHistory(String aMsg) throws Exception {
-    	System.out.println("ratingHistory starts");
-    	System.out.println("ratingHistory input aMsg: " + aMsg);
+    	Util.getConsoleLogger().info("ratingHistory starts");
+    	Util.getConsoleLogger().info("ratingHistory input aMsg: " + aMsg);
     	
     	JsonObject msgJsonObj = Util.getGJsonObject(aMsg);
     	String ratingResult = Util.getGString(msgJsonObj, "ratingResult");
@@ -412,35 +417,36 @@ public class BasicController {
     	ratingHistoryList.add(ratingResult);
     	
         /** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
-        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
-        Collections.reverse(tmpRatingHistoryList);
-        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
-        System.out.println("ratingHistory() input RatingHistoryListResult: " + RatingHistoryListResult);
-        
-     // test
-//        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_ratingHistory, "testMsg");
+    	String RatingHistoryListResult = getRatingHistoryListOutput();
         
         return RatingHistoryListResult;
     }
     
     
-//    @MessageMapping("/triggerNewFileUploaded")
-//    @SendTo(UtilWebOSocketMsgBroker.TOPIC + UtilWebOSocketMsgBroker.CHANNEL_fileUploaded)
-//    public String fileUploaded(String aMsg) throws Exception {
-//    	System.out.println("fileUploaded starts");
-//    	System.out.println("fileUploaded input aMsg: " + aMsg);
-//    	
-//    	JsonObject msgJsonObj = Util.getGJsonObject(aMsg);
-//    	String ratingResult = Util.getGString(msgJsonObj, "ratingResult");
-//    	Util.getConsoleLogger().info("fileUploaded ratingResult: " + ratingResult);
-//        
-//     // test
-////        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_ratingHistory, "testMsg");
-//        
-//        return RatingHistoryListResult;
-//    }
+    @MessageMapping("/triggerInit")
+    @SendTo(UtilWebOSocketMsgBroker.TOPIC + UtilWebOSocketMsgBroker.CHANNEL_init)
+    public String init(String aMsg) throws Exception {
+    	Util.getConsoleLogger().info("triggerInit starts");
+    	Util.getConsoleLogger().info("triggerInit input aMsg: " + aMsg);
+    	
+        // 通知圖片紀錄
+        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_fileUploaded, UtilUploadFile.lastFileUrl);
+        
+        // 通知評論紀錄
+        String RatingHistoryListResult = getRatingHistoryListOutput();
+        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(UtilWebOSocketMsgBroker.CHANNEL_ratingHistory, RatingHistoryListResult);
+        
+        Util.getConsoleLogger().info("triggerInit ends");
+        return "";
+    }
     
     
-    
+    private String getRatingHistoryListOutput(){
+        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
+        Collections.reverse(tmpRatingHistoryList);
+        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
+        Util.getConsoleLogger().info("ratingHistory() input RatingHistoryListResult: " + RatingHistoryListResult);
+        return RatingHistoryListResult;
+    }
 
 }

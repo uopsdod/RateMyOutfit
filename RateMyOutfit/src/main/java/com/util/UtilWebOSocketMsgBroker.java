@@ -25,4 +25,5 @@ public class UtilWebOSocketMsgBroker {
 	
 	public static final String CHANNEL_ratingHistory = "/ratingHistory";
 	public static final String CHANNEL_fileUploaded = "/fileUploaded";
+	public static final String CHANNEL_init= "/init";
 }
