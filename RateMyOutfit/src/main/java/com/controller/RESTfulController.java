@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.common.ErrorVO;
+import com.model.common.CommonVO;
 import com.model.customer.CustomerRepository;
 import com.model.mem.Mem;
 import com.model.mem.MemRepository;
+import com.util.RESTfulUtil;
 import com.util.Util;
 
 @RestController
@@ -54,6 +55,7 @@ public class RESTfulController {
     			/** 帳號密碼皆正確,給予使用者完整資訊 **/
     			}else{
     				mem = currMem;
+    				mem.setJwtStr(RESTfulUtil.createJWT());
     			}
     		}
     	}

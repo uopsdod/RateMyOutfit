@@ -76,12 +76,12 @@ public class SpringTestRunner implements CommandLineRunner{
 //        System.out.println("Done!");
 		
 		// JWT - generate
-		String jwt = RESTfulUtil.createJWT(String.valueOf(RESTfulUtil.JWTIDcount.incrementAndGet()), RESTfulUtil.JWTIssuerID, RESTfulUtil.JWTSubject, RESTfulUtil.expireTime);
+		String jwt = RESTfulUtil.createJWT();
 		Util.getConsoleLogger().info("TestSender - jwt: " + jwt);
 		
 		RESTfulUtil.parseJWT(jwt);
 		
-		jwt = RESTfulUtil.createJWT(String.valueOf(RESTfulUtil.JWTIDcount.incrementAndGet()), RESTfulUtil.JWTIssuerID, RESTfulUtil.JWTSubject, RESTfulUtil.expireTime);
+		jwt = RESTfulUtil.createJWT();;
 		Util.getConsoleLogger().info("TestSender - jwt: " + jwt);
 		
 		RESTfulUtil.parseJWT(jwt);

@@ -21,7 +21,7 @@ public class RESTfulUtil {
     public static Long expireTime = -1000L;
     
   //Sample method to construct a JWT
-    public static String createJWT(String id, String issuer, String subject, long ttlMillis) {
+    public static String createJWT() {
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -34,15 +34,15 @@ public class RESTfulUtil {
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         //Let's set the JWT Claims
-        JwtBuilder builder = Jwts.builder().setId(id)
+        JwtBuilder builder = Jwts.builder().setId(String.valueOf(JWTIDcount.incrementAndGet()))
                                     .setIssuedAt(now)
-                                    .setSubject(subject)
-                                    .setIssuer(issuer)
+                                    .setSubject(JWTSubject)
+                                    .setIssuer(JWTIssuerID)
                                     .signWith(signatureAlgorithm, signingKey);
 
         //if it has been specified, let's add the expiration
-        if (ttlMillis >= 0) {
-        long expMillis = nowMillis + ttlMillis;
+        if (expireTime >= 0) {
+        long expMillis = nowMillis + expireTime;
             Date exp = new Date(expMillis);
             builder.setExpiration(exp);
         }
