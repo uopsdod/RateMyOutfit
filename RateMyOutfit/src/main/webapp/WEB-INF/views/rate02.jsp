@@ -109,7 +109,7 @@ label {
 
 </style>
 </head>
-<body onload="onLoad();">
+<body>
 	<!-- 標題 -->
 	<div class="row no-gutter" style="border-bottom: 1px solid #c0c0c0; width: 100%;"> <!-- width: 100% 讓螢幕寬度符合螢幕大小 -->
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
@@ -130,8 +130,11 @@ label {
 			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 panel-body"
 				 >
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">
-					<b>大名</b>:<br>
-					<input type="text" id="UserName" placeholder="guest name"><br> 
+					<b>帳號</b>:<br>
+					<input type="text" id="account" placeholder="account"><br> 
+					<b>密碼</b>:<br>
+					<input type="text" id="password" placeholder="password"><br> 
+					<input type="submit" class="btn btn-info" value="登入(請改成燈箱,若已登入,就不在顯示此按鈕)">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">	
 					<b>上傳圖片</b>:<br>
@@ -278,13 +281,5 @@ label {
 <!-- 	    </div> -->
 <!-- 	</form> -->
 </body>
-
-<script type="text/javascript">
-
-function onLoad(){
-	
-}
-
-</script>
 
 </html>

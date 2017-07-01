@@ -1,6 +1,7 @@
 
 var stompClient = null;
 var currFileName = '';
+var jwtStr = null;
 
 
 function connect() {
@@ -82,7 +83,51 @@ function updateProfilePage(picUrl){
     }
 }
 
-$(function () {
+function checkIfJWTValid(aAccount, aPassword){
+	console.log("checkIfJWTValid input aAccount: " + aAccount);
+	console.log("checkIfJWTValid input aPassword: " + aPassword);
+    $.post("login",
+            {
+    		  account: aAccount,
+    		  password: aPassword
+            },
+            function(data,status){
+                console.log(data)
+                console.log("data: " , data);
+                console.log(status);
+                if ("success" == status){
+                	console.log("login success");
+            	    // 直接連上server,建立stompClient
+            	    connect();
+                }else{
+                	consoel.log("Please try login again");
+                }
+   });
+}
+
+$(document).ready(function(){
+	console.log("document ready");
+	
+	// 建立測試用資料
+	$("#account").val("sam");
+	$("#password").val("1111");
+	
+	if (jwtStr == undefined){
+		console.log("jwtStr is empty");
+		var account = $("#account").val();
+		var password = $("#password").val();
+		
+		checkIfJWTValid(account, password);
+	}
+	
+//	
+//	if (!checkIfJWTValid()){
+//		
+//	}else{
+//	    // 直接連上server,建立stompClient
+//	    connect();
+//	}
+	
     $("#formRatingHistory").on('submit', function (e) {
         e.preventDefault();
     });
@@ -117,9 +162,6 @@ $(function () {
         });
     });
     
-    // 直接連上即可
-    connect();
-    
     // 一次設定全部onClick事件
     $("[name=triggerRatingHistoryBroadcast]").click(function() { 
     	console.log("triggerRatingHistoryBroadcast" + this.value);
@@ -135,3 +177,7 @@ $(function () {
 //    $( "#disconnect" ).click(function() { disconnect(); });
 //    $( "#send" ).click(function() { sendName(); });
 });
+
+//$(function () {
+//
+//});
