@@ -2,10 +2,14 @@ package com.model.mem;
 
 import javax.persistence.*;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.model.common.ErrorVO;
+
 import java.util.Date;
 
 @Entity
-public class Mem {
+public class Mem extends ErrorVO{
 
     //http://www.oracle.com/technetwork/middleware/ias/id-generation-083058.html
     @Id
@@ -80,5 +84,10 @@ public class Mem {
 //                ", date=" + date +
 //                '}';
 //    }
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
     
 }

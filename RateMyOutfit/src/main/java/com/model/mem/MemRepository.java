@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public interface MemRepository extends CrudRepository<Mem, Long> {
 
     List<Mem> findByMemName(String memName);
+    List<Mem> findByMemAccount(String memAccount);
 
     @Query("select m from Mem m where m.memName = :memName")
     Stream<Mem> findByEmailReturnStream(@Param("memName") String memName);
