@@ -1166,3 +1166,29 @@
 [17/07/01 22:50:24.015][ INFO][com.spring.MyApplicationListener   -19   ] - ContextRefreshedEvent end ###################
 [17/07/01 22:50:24.129][ INFO][com.spring.TestSender              -22   ] - TestSender - CommandLineRunner() called - 開始測試
 [17/07/01 22:50:24.129][ INFO][com.spring.TestSender              -26   ] - TestSender - CommandLineRunner() called - 結束測試
+[17/07/02 01:37:03.456][ INFO][com.util.Util                      -33   ] - Util() start
+[17/07/02 01:37:03.461][ INFO][com.util.Util                      -35   ] - Util() end
+[17/07/02 01:37:04.391][ INFO][com.spring.MyApplicationListener   -16   ] - ContextRefreshedEvent start ###################
+[17/07/02 01:37:04.392][ INFO][com.spring.MyApplicationListener   -19   ] - ContextRefreshedEvent end ###################
+[17/07/02 01:37:04.811][ INFO][com.spring.MyApplicationListener   -24   ] - ContextClosedEvent start ###################
+[17/07/02 01:37:04.812][ INFO][com.spring.MyApplicationListener   -27   ] - ContextClosedEvent end ###################
+[17/07/02 01:37:23.425][ INFO][com.util.Util                      -33   ] - Util() start
+[17/07/02 01:37:23.431][ INFO][com.util.Util                      -35   ] - Util() end
+[17/07/02 01:37:24.128][ INFO][com.spring.MyApplicationListener   -16   ] - ContextRefreshedEvent start ###################
+[17/07/02 01:37:24.128][ INFO][com.spring.MyApplicationListener   -19   ] - ContextRefreshedEvent end ###################
+[17/07/02 01:37:24.527][ INFO][com.spring.MyApplicationListener   -24   ] - ContextClosedEvent start ###################
+[17/07/02 01:37:24.528][ INFO][com.spring.MyApplicationListener   -27   ] - ContextClosedEvent end ###################
+[17/07/02 01:39:38.368][ INFO][com.util.Util                      -33   ] - Util() start
+[17/07/02 01:39:38.374][ INFO][com.util.Util                      -35   ] - Util() end
+[17/07/02 01:39:39.173][ INFO][com.spring.MyApplicationListener   -16   ] - ContextRefreshedEvent start ###################
+[17/07/02 01:39:39.174][ INFO][com.spring.MyApplicationListener   -19   ] - ContextRefreshedEvent end ###################
+[17/07/02 01:40:00.238][ INFO][com.util.Util                      -33   ] - Util() start
+[17/07/02 01:40:00.272][ INFO][com.util.Util                      -35   ] - Util() end
+[17/07/02 01:40:01.223][ INFO][com.spring.MyApplicationListener   -16   ] - ContextRefreshedEvent start ###################
+[17/07/02 01:40:01.223][ INFO][com.spring.MyApplicationListener   -19   ] - ContextRefreshedEvent end ###################
+[17/07/02 01:40:25.728][ INFO][com.util.Util                      -33   ] - Util() start
+[17/07/02 01:40:25.734][ INFO][com.util.Util                      -35   ] - Util() end
+[17/07/02 01:40:26.663][ INFO][com.spring.MyApplicationListener   -16   ] - ContextRefreshedEvent start ###################
+[17/07/02 01:40:26.663][ INFO][com.spring.MyApplicationListener   -19   ] - ContextRefreshedEvent end ###################
+[17/07/02 01:40:26.958][ INFO][com.spring.MyApplicationListener   -24   ] - ContextClosedEvent start ###################
+[17/07/02 01:40:26.959][ INFO][com.spring.MyApplicationListener   -27   ] - ContextClosedEvent end ###################
