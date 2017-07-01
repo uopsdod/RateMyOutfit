@@ -1,4 +1,4 @@
-package com.storage;
+package com.util.storage;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

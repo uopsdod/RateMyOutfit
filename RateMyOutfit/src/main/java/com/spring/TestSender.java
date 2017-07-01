@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonObject;
 import com.util.Util;
-import com.util.UtilWebOSocketMsgBroker;
+import com.util.MessageBrokerUtil;
 
 @Component
 public class TestSender implements CommandLineRunner{
 	@Autowired
-	private UtilWebOSocketMsgBroker utilWebOSocketMsgBroker;
+	private MessageBrokerUtil utilWebOSocketMsgBroker;
 
 	public void run(String... arg0) throws Exception {
 		Util.getConsoleLogger().info("TestSender - CommandLineRunner() called - 開始測試");

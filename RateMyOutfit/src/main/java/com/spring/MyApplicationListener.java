@@ -1,4 +1,4 @@
-package com.bean;
+package com.spring;
 
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -7,7 +7,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.util.Util;
 
-public class ApplicationListenerBean implements ApplicationListener {
+public class MyApplicationListener implements ApplicationListener {
 	
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
