@@ -11,11 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import com.spring.BasicController;
-import com.storage.StorageService;
+import com.controller.BasicController;
+import com.controller.FileUploadController;
+import com.util.storage.StorageService;
 
 @Component
-public class UtilUploadFile {
+public class FileUploadUtil {
 	
 	// 暫時處理方式,以後可能會變
 	public static String lastFileUrl = "";
@@ -23,7 +24,7 @@ public class UtilUploadFile {
 	private final StorageService storageService;
 	
     @Autowired
-    public UtilUploadFile(StorageService storageService) {
+    public FileUploadUtil(StorageService storageService) {
     	System.out.println("UtilUploadFile() called");
         this.storageService = storageService;
     }
@@ -32,7 +33,7 @@ public class UtilUploadFile {
      * 特別注意: 此方法須為form submit才可正常使用,因為需要有servletRequest的相關資訊***
      * @return
      */
-	public String getResult() {
+	public String getFileUri() {
 		String result = "";
 		// model.put("message", "hello");
 		// model.addAttribute("fileCount", fileCount);
@@ -44,7 +45,7 @@ public class UtilUploadFile {
 			// serveFile = this.serveFile(lastPath.getFileName().toString());
 			try {
 				result = MvcUriComponentsBuilder
-						.fromMethodName(BasicController.class, "serveFile",
+						.fromMethodName(FileUploadController.class, "serveFile",
 								lastPath.get().getFileName().toString())
 						// .fromMethodName(BasicController.class, "serveFile",
 						// lastPath.getFileName().toString())

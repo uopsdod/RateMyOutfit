@@ -8,21 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.regex.Matcher;
@@ -35,7 +20,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import com.bean.VersionBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
@@ -45,12 +29,9 @@ public class Util {
 	
 	private static Gson gson;
 	
-	public Util(Gson aGson, VersionBean versionBean){
+	public Util(Gson aGson){
 		Util.getFileLogger().info("Util() start");
 		Util.gson = aGson;
-		
-		// 寫入version
-		Util.getFileLogger().info("Util - " + versionBean.getProjectName() + " version: " + versionBean.getVersion());
 		Util.getFileLogger().info("Util() end");
 	}	
 	

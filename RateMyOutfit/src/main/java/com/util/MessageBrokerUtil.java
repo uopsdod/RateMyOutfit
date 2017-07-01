@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
-public class UtilWebOSocketMsgBroker {
+public class MessageBrokerUtil {
 	
     private SimpMessagingTemplate template;
 
     @Autowired
-    public UtilWebOSocketMsgBroker(SimpMessagingTemplate aTemplate) {
+    public MessageBrokerUtil(SimpMessagingTemplate aTemplate) {
         this.template = aTemplate;
     }
     
     public void sendMsgToTopicSubcriber(String aTopicName, String aText){
-    	String dst = UtilWebOSocketMsgBroker.TOPIC + "/" + aTopicName;
+    	String dst = MessageBrokerUtil.TOPIC + "/" + aTopicName;
     	System.out.println("sendMsgToTopicSubcriber dst: " + dst);
     	this.template.convertAndSend(dst, aText);
     }

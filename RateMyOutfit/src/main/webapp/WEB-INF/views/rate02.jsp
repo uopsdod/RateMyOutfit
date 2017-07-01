@@ -195,19 +195,19 @@ label {
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 <!-- 						<img alt="" src="pic02.png"> -->
 <%-- 						<span class="input-xlarge uneditable-input">"${files}"</span> --%>
-						<img id="mainPic" src="whitePic.png" height="240">
+						<img id="mainPic" src="" height="240">
 <%-- 						<c:forEach var="item" items="${files}"> --%>
 <%-- 							Access here item if needed <c:out value="${item}"/> --%>
 <%-- 							<img id="innerMainPic" src="${item}"> --%>
 <%-- 						</c:forEach> --%>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
-						<form id='formRatingHistory' name='formName' action="/giveRating">
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="go_die.png" border="0" alt="Submit" width="84" height="84" value="可以去死一死了"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="ghost.png" border="0" alt="Submit" width="84" height="84" value="看見鬼"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="misery.png" border="0" alt="Submit" width="84" height="84" value="慘"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="nerdy.png" border="0" alt="Submit" width="84" height="84" value="宅"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="good.png" border="0" alt="Submit" width="84" height="84" value="讚"></button>
+						<form id='formRatingHistory' name='formName' action="/">
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/go_die.png" border="0" alt="Submit" width="84" height="84" value="可以去死一死了"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/ghost.png" border="0" alt="Submit" width="84" height="84" value="看見鬼"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/misery.png" border="0" alt="Submit" width="84" height="84" value="慘"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/nerdy.png" border="0" alt="Submit" width="84" height="84" value="宅"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/good.png" border="0" alt="Submit" width="84" height="84" value="讚"></button>
 					        
 					        <!-- test -->
 <!-- 					        <input id="initTest" type="button" value="init"></button> -->
@@ -280,52 +280,9 @@ label {
 </body>
 
 <script type="text/javascript">
-// var localFileCount = -1;
-// var currFileName = "";
-
-// setInterval(function(){ 
-// 	console.log("timer beats");
-// 	/** 跟server要ratingHistory資訊 **/
-	
-	
-// 	$.get("getRatingHistory", function(data, status){
-// 	    console.log("Data: " + data + "\nStatus: " + status);
-// 	    var ratingHistoryList = data.split(",");
-// 	    var i;
-// 	    var result = "";
-// 		for (i = 0; i < ratingHistoryList.length; i++) {
-// 			console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
-// 			console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
-			
-// 			result += ratingHistoryList[i].trim() + "<br>";
-// // 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
-// // 		                                                                 = "visible";
-// 		}
-// 		console.log("result: " + result);
-// 		document.getElementById("historyRatingResult").innerHTML = result;	
-	    
-// 	});
-// }, 500);
-
-// setInterval(function(){ 
-// 	console.log("check file timer beats");
-// 	updatePic();
-// }, 500);
-
-// function updatePic(){
-// 	$.get("checkIfNewFileUploaded", function(data, status){
-// 	    console.log("check file Data: " + data + "\nStatus: " + status);
-// 	    if (currFileName != data){
-// 	    	currFileName = data;
-// 	    	document.getElementById("mainPic").src = currFileName;
-// 	    }
-	    
-// 	});
-// }
-
 
 function onLoad(){
-// 	updatePic();
+	
 }
 
 </script>
