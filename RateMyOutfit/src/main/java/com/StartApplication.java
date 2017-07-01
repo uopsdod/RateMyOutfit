@@ -88,7 +88,7 @@ public class StartApplication extends SpringBootServletInitializer  implements C
 
         System.out.println("Done!");
 
-        exit(0);
+//        exit(0);
     }
 	
 }
