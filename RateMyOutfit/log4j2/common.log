@@ -1044,3 +1044,10 @@
 [17/07/01 20:16:19.854][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
 [17/07/01 20:16:20.203][ INFO][com.spring.TestSender              -22   ] - TestSender - CommandLineRunner() called - 開始測試
 [17/07/01 20:16:20.204][ INFO][com.spring.TestSender              -26   ] - TestSender - CommandLineRunner() called - 結束測試
+[17/07/01 20:57:46.948][ INFO][com.util.Util                      -49   ] - Util() start
+[17/07/01 20:57:46.952][ INFO][com.util.Util                      -53   ] - Util - YourProjectName version: v1.0.0
+[17/07/01 20:57:46.952][ INFO][com.util.Util                      -54   ] - Util() end
+[17/07/01 20:57:47.899][ INFO][com.bean.ApplicationListenerBean   -16   ] - ContextRefreshedEvent start ###################
+[17/07/01 20:57:47.899][ INFO][com.bean.ApplicationListenerBean   -19   ] - ContextRefreshedEvent end ###################
+[17/07/01 20:57:47.984][ INFO][com.spring.TestSender              -22   ] - TestSender - CommandLineRunner() called - 開始測試
+[17/07/01 20:57:47.985][ INFO][com.spring.TestSender              -26   ] - TestSender - CommandLineRunner() called - 結束測試
