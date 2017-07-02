@@ -100,18 +100,47 @@ function checkIfJWTValid(aAccount, aPassword){
             },
             function(data,status){
                 console.log(data)
-                console.log("data: " , data);
+                console.log("checkIfJWTValid data: " , data);
+                console.log("checkIfJWTValid data.errorMsgs: " , data.errorMsgs);
+                console.log("checkIfJWTValid data.errorMsgs.length: " , data.errorMsgs.length);
                 console.log(status);
                 if ("success" == status){
-                	console.log("login success");
-                	// 關閉lightbox
-                	$("#loginDiv").trigger('close');
-            	    // 連上server,建立stompClient
-            	    connect();
-            	    // 更換使用者名稱資訊
-            	    console.log("data.memName: " + data.memName);
+                	if (data.errorMsgs.length == 0){
+                		console.log("checkIfJWTValid login success");
+                		// 關閉lightbox
+                		$("#loginDiv").trigger('close');
+                		// 連上server,建立stompClient
+                		connect();
+                		// 更換使用者名稱資訊
+                		console.log("checkIfJWTValid data.memName: " + data.memName);
 //            	    $("#username")[0].innerHtml = data.memName; // not working
-            	    $('#username').text( data.memName );
+                		$('#username').text( data.memName );
+                	}else{
+                		
+//                		var countries = ['United States', 'Canada', 'Argentina', 'Armenia'];
+                		var errorMsgList = $('#errorMsgList')[0];
+                		$('#errorMsgList').empty(); // 先清空
+                		$.each(data.errorMsgs, function(i)
+                		{
+                		    var li = $('<li/>')
+                		        .addClass('ui-menu-item')
+                		        .attr('role', 'menuitem')
+                		        .appendTo(errorMsgList);
+                		    var aaa = $('<p/>')
+                		        .addClass('ui-all')
+                		        .attr('style','color:red')
+                		        .text(data.errorMsgs[i])
+                		        .appendTo(li);
+                		});
+                		
+                		// debug
+                		var errorMsgLength = data.errorMsgs.length;
+                		for (var i = 0; i < errorMsgLength; i++) {
+                		    console.log("checkIfJWTValid " + data.errorMsgs[i]);
+                		    $("#errorMsgs").val();
+                		    //Do something
+                		}
+                	}
                 }else{
                 	consoel.log("Please try login again");
                 	
@@ -129,7 +158,14 @@ $(document).ready(function(){
 	if (jwtStr == undefined){
 		console.log("jwtStr is empty");
 		
-		$("#loginDiv").lightbox_me();
+		$("#loginDiv").lightbox_me({
+	        centered: true,
+	        closeClick: false, // disallow user to close this lightbox by clicking the overlay
+	        closeEsc: false,
+	        onLoad: function() { 
+	            $('#loginDiv').find('#loginAccount').focus()
+	        }
+		});
 		
 //		var account = $("#account").val();
 //		var password = $("#password").val();
@@ -197,6 +233,16 @@ $(document).ready(function(){
     $("#guestSignin").click(function() {
 //    	doLogin();
     	checkIfJWTValid(guest_account_g, guest_password_g);
+    });
+    
+    $("#Singin").click(function() {
+		var account = $("#loginAccount").val();
+		var password = $("#loginPwd").val();
+    	checkIfJWTValid(account, password);
+    });
+
+    $("#singup").click(function() {
+    	alert("抱歉,功能尚在開發中!");
     });
     
     

@@ -268,14 +268,6 @@ label {
 					<c:out value="${ratingHistory}"/><br>
 <%-- 					<img src="${item}"> --%>
 				</c:forEach>				
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
-<!-- 				some log ... <br> some log ... <br> some log ... <br> some log ... <br> some log ... <br> -->
 			</div>
 		</div>
 	</div> <!-- end of row -->
@@ -301,7 +293,7 @@ label {
 								type="text" class="input">
 						</div>
 						<div class="group">
-							<label for="loginPass" class="label">Password</label> <input id="loginPass"
+							<label for="loginPwd" class="label">Password</label> <input id="loginPwd"
 								type="password" class="input" data-type="password">
 						</div>
 						<div class="group">
@@ -310,10 +302,15 @@ label {
 								Signed in</label>
 						</div>
 						<div class="group">
-							<input type="submit" class="button" value="Sign In">
+							<input id="Singin" type="submit" class="button" value="Sign In">
 						</div>
 						<div class="group">
-							<input id="guestSignin" type="submit" class="button" value="Guse Sign In">
+							<input id="guestSignin" type="submit" class="button" value="Guest Sign In">
+						</div>
+						<div class="group">
+							<ul id="errorMsgList">
+							</ul>
+<!-- 							<input id="errorMsgs" type="errorMsgs" name="errorMsgs"> -->
 						</div>
 						<div class="hr"></div>
 						<div class="foot-lnk">
@@ -340,7 +337,7 @@ label {
 								id="pass" type="text" class="input">
 						</div>
 						<div class="group">
-							<input type="submit" class="button" value="Sign Up">
+							<input id="singup" type="submit" class="button" value="Sign Up">
 						</div>
 						<div class="hr"></div>
 						<div class="foot-lnk">
