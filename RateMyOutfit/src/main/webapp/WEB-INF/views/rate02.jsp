@@ -30,6 +30,25 @@
 </script>
 
 <style>
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("img/bg_stripe_dotline.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 .center {
 	margin: auto;
 	text-align: center;
@@ -116,7 +135,7 @@ label {
 
 </style>
 </head>
-<body>
+<body class="bg">
 	<!-- 標題 -->
 	<div class="row no-gutter" style="border-bottom: 1px solid #c0c0c0; width: 100%;"> <!-- width: 100% 讓螢幕寬度符合螢幕大小 -->
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
@@ -127,7 +146,7 @@ label {
 	
 	<div class="row" style="width: 100%;"> <!-- width: 100% 讓螢幕寬度符合螢幕大小 -->
 		<!-- 覺得帥/美，想挑戰 -->
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xs-3 panel panel-default nopadding"
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xs-3 panel panel-info nopadding"
 			 >
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-heading center nopadding">
 				<h3>覺得帥/美，想挑戰</h3>
@@ -186,7 +205,7 @@ label {
 		</div>
 		<!-- 鑑賞區 -->
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 center" id="chatDialogue">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container panel panel-default center nopadding ">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container panel panel-info center nopadding ">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-heading nopadding">
 					<h3>鑑賞區</h3>
 				</div>
@@ -257,7 +276,7 @@ label {
 <!-- 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 center" id="chatDialogueReverse"></div> -->
 
 		<!-- 評分紀錄 -->
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 panel panel-default center nopadding">
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 panel panel-info center nopadding">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-heading nopadding">
 			<h3>評分紀錄</h3>
 			</div>
