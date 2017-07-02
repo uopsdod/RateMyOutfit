@@ -19,6 +19,13 @@
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
+<!-- lightbox -->
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+<script src="js/jquery.lightbox_me.js"></script>
+
+<!-- login form -->
+<link href="css/login_form.css" rel="stylesheet" />
+
 <script src="js/main.js"></script>
 </script>
 
@@ -127,45 +134,47 @@ label {
 			</div>
 <!-- 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div> -->
 <!-- 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div> -->
-			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 panel-body"
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel-body"
 				 >
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">
-					<b>帳號</b>:<br>
-					<input type="text" id="account" placeholder="account"><br> 
-					<b>密碼</b>:<br>
-					<input type="text" id="password" placeholder="password"><br> 
-					<input type="submit" class="btn btn-info" value="登入(請改成燈箱,若已登入,就不在顯示此按鈕)">
+					<form class="form-horizontal">
+						<div class="form-group">
+<!-- 							<label class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4" for="username">使用者:</label> -->
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<span class="form-control-static">使用者: </span>
+								<span id="username" class="form-control-static">尚未登入</span>
+							</div>
+						</div>
+<!-- 						<div class="form-group"> -->
+<!-- 							<label class="control-label col-sm-2" for="pwd">Password:</label> -->
+<!-- 							<div class="col-sm-10"> -->
+<!-- 								<input type="password" class="form-control" id="pwd" -->
+<!-- 									placeholder="Enter password" name="pwd"> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<div class="col-sm-offset-2 col-sm-10"> -->
+<!-- 								<button type="submit" class="btn btn-default">Submit</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+					</form>
+<!-- 					<b>使用者</b>: <span id="username">尚未登入</span><br> -->
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">	
-					<b>上傳圖片</b>:<br>
-					<div>
-						<form id="formUploadFile" method="POST" enctype="multipart/form-data" action="/">
-							<table>
-								<tr><td></td>
-									<td>
+					<form id="formUploadFile" method="POST" enctype="multipart/form-data" action="/">
+						<table>
+							<tr><b>上傳圖片</b>:</tr>
+							<tr><td></td>
+								<td>
 <!-- 										<label for="upload-photo">Browse...</label> -->
-										<input type="file" name="file" id="upload-photo"/>
-									</td>
-								</tr>
+									<input type="file" name="file" id="upload-photo"/>
+								</td>
+							</tr>
 <!-- 								<button class="btn btn-primary btn-sm" id="sendToRoom" onclick="sendtoRoom();">SEND</button> -->
-								<tr> <td></td><td><input type="submit" class="btn btn-info" value="確定上傳"></td></tr>
+							<tr> <td></td><td><input type="submit" class="btn btn-info" value="確定上傳"></td></tr>
 <!-- 								<tr> <td></td><td><input type="submit" value="Upload" /></td></tr> -->
-							</table>
-						</form>
-					</div>					
-					
-					<span id="UserID"></span><br> 
-<!-- 					<b>Status:</b><br> -->
-<!-- 					<span id="Status"></span><br> -->
-<!-- 					<b>RoomID:</b><br>  -->
-<!-- 					<span id="RoomID"></span><br>  -->
-<!-- 					<b>AgentIDs</b>:<br>  -->
-<!-- 					<span id="AgentIDs"></span><br>  -->
-<!-- 					<b>AgentNames:</b><br>  -->
-<!-- 					<span id="AgentNames"></span><br>  -->
-<!-- 					<b>Event:</b><br>  -->
-<!-- 					<span id="Event"></span><br> -->
-<!-- 					<br> -->
+						</table>
+					</form>
 				</div>		
 <!-- 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
 <!-- 					<button class="btn btn-primary btn-sm" id="openChat" onclick="Login();">openChat</button> -->
@@ -272,14 +281,77 @@ label {
 	</div> <!-- end of row -->
 	
 	
-<!-- 	<form class="form-inline"> -->
 <!-- 	    <div class="form-group"> -->
 <!-- 	        <label for="connect">WebSocket connection:</label> -->
-<!-- 	        <button id="connect" class="btn btn-default" type="submit">Connect</button> -->
-<!-- 	        <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect -->
+<!-- 	        <button id="login" class="btn btn-default" type="submit">login</button> -->
+<!-- 	        <button id="Guest Login" class="btn btn-default" type="submit">Guest Login -->
 <!-- 	        </button> -->
 <!-- 	    </div> -->
-<!-- 	</form> -->
+		<div id="loginDiv" class="login-wrap form-group" style="display: none;">
+			<div class="login-html">
+				<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label
+					for="tab-1" class="tab">Sign In</label> <input id="tab-2"
+					type="radio" name="tab" class="sign-up"><label for="tab-2"
+					class="tab">Sign Up</label>
+				<div class="login-form">
+					<form method="post" id="loginForm">
+					<div class="sign-in-htm">
+						<div class="group">
+							<label for="loginAccount" class="label">Account</label> <input id="loginAccount"
+								type="text" class="input">
+						</div>
+						<div class="group">
+							<label for="loginPass" class="label">Password</label> <input id="loginPass"
+								type="password" class="input" data-type="password">
+						</div>
+						<div class="group">
+							<input id="check" type="checkbox" class="check" checked>
+							<label for="check"><span class="icon"></span> Keep me
+								Signed in</label>
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign In">
+						</div>
+						<div class="group">
+							<input id="guestSignin" type="submit" class="button" value="Guse Sign In">
+						</div>
+						<div class="hr"></div>
+						<div class="foot-lnk">
+							<a href="#forgot">Forgot Password?</a>
+						</div>
+					</div>
+					</form>
+					<form method="post" id="signupForm">
+					<div class="sign-up-htm">
+						<div class="group">
+							<label for="account" class="label">Account</label> <input id="account"
+								type="text" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Password</label> <input id="pass"
+								type="password" class="input" data-type="password">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Repeat Password</label> <input
+								id="pass" type="password" class="input" data-type="password">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Email Address</label> <input
+								id="pass" type="text" class="input">
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Sign Up">
+						</div>
+						<div class="hr"></div>
+						<div class="foot-lnk">
+							<label for="tab-1">Already Member?</label>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>	
+	
 </body>
 
 </html>

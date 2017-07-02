@@ -3,6 +3,9 @@ var stompClient = null;
 var currFileName = '';
 var jwtStr = null;
 
+// 測試資料 ('_g'代表全域變數) 
+var guest_account_g = "sam";
+var guest_password_g = "1111";
 
 function connect() {
     var socket = new SockJS('/gs-guide-websocket');
@@ -83,6 +86,10 @@ function updateProfilePage(picUrl){
     }
 }
 
+function doLogin(){
+	
+}
+
 function checkIfJWTValid(aAccount, aPassword){
 	console.log("checkIfJWTValid input aAccount: " + aAccount);
 	console.log("checkIfJWTValid input aPassword: " + aPassword);
@@ -97,10 +104,17 @@ function checkIfJWTValid(aAccount, aPassword){
                 console.log(status);
                 if ("success" == status){
                 	console.log("login success");
-            	    // 直接連上server,建立stompClient
+                	// 關閉lightbox
+                	$("#loginDiv").trigger('close');
+            	    // 連上server,建立stompClient
             	    connect();
+            	    // 更換使用者名稱資訊
+            	    console.log("data.memName: " + data.memName);
+//            	    $("#username")[0].innerHtml = data.memName; // not working
+            	    $('#username').text( data.memName );
                 }else{
                 	consoel.log("Please try login again");
+                	
                 }
    });
 }
@@ -109,15 +123,18 @@ $(document).ready(function(){
 	console.log("document ready");
 	
 	// 建立測試用資料
-	$("#account").val("sam");
-	$("#password").val("1111");
+//	$("#account").val("sam");
+//	$("#password").val("1111");
 	
 	if (jwtStr == undefined){
 		console.log("jwtStr is empty");
-		var account = $("#account").val();
-		var password = $("#password").val();
 		
-		checkIfJWTValid(account, password);
+		$("#loginDiv").lightbox_me();
+		
+//		var account = $("#account").val();
+//		var password = $("#password").val();
+		
+//		checkIfJWTValid(account, password);
 	}
 	
 //	
@@ -130,6 +147,12 @@ $(document).ready(function(){
 	
     $("#formRatingHistory").on('submit', function (e) {
         e.preventDefault();
+    });
+    $("#loginForm").on('submit', function (e) {
+    	e.preventDefault();
+    });
+    $("#signupForm").on('submit', function (e) {
+    	e.preventDefault();
     });
     $("#formUploadFile").on('submit', function (e) {
         e.preventDefault();
@@ -170,6 +193,12 @@ $(document).ready(function(){
 //    	var contents = $('#contents')[0];
     	triggerRatingHistoryBroadcast(this.value); 
     });
+    
+    $("#guestSignin").click(function() {
+//    	doLogin();
+    	checkIfJWTValid(guest_account_g, guest_password_g);
+    });
+    
     
 //    $( "#initTest" ).click(function() { triggerInit(); });
     
