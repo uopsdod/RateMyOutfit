@@ -1,6 +1,10 @@
 package com.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -22,5 +26,8 @@ public class MessageBrokerConfig extends AbstractWebSocketMessageBrokerConfigure
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint(MessageBrokerUtil.ENDPOINT).withSockJS();
     }
-
+    @Override
+    public boolean configureMessageConverters(List<MessageConverter> converters) {
+      return true;
+    }
 }

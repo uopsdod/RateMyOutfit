@@ -15,6 +15,8 @@ import com.model.common.CommonVO;
 import com.model.customer.CustomerRepository;
 import com.model.mem.Mem;
 import com.model.mem.MemRepository;
+import com.model.picture.Pic;
+import com.model.picture.PicRepository;
 import com.util.RESTfulUtil;
 import com.util.Util;
 
@@ -27,6 +29,9 @@ public class RESTfulController {
 
     @Autowired
     MemRepository memRepository;
+
+    @Autowired
+    PicRepository picRepository;
 	
     @PostMapping("/login")
     public Mem login(@RequestParam(value="account", required=true) String account
@@ -63,5 +68,10 @@ public class RESTfulController {
     	Util.getConsoleLogger().info(TAG + "/login output ");
     	Util.getConsoleLogger().info(TAG + "/login ends");
         return mem;
+    }
+    
+    @PostMapping("/updatePic")
+    public Pic giveRating(@RequestParam(value="ratingNumber", required=true) String ratingNumberd) {
+    	return null;
     }
 }

@@ -32,7 +32,10 @@ function connect() {
         	console.log("connect() fileUploaded - data.body: " + data.body);
         	console.log("connect() fileUploaded - data.body: " , data.body);
         	
-        	updateProfilePage(data.body);
+        	var dataJson = jQuery.parseJSON(data.body);
+        	console.log("connect() fileUploaded - dataJson: " , dataJson);
+        	console.log("connect() fileUploaded - dataJson.picUrl: " , dataJson.picUrl);
+        	updateProfilePage(dataJson.picUrl);
         	
 //        	updateRatingHistoryPage(data.body);
         	

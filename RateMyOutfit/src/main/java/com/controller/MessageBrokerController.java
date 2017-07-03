@@ -38,7 +38,10 @@ public class MessageBrokerController {
     	String ratingResult = Util.getGString(msgJsonObj, "ratingResult");
     	Util.getConsoleLogger().info("ratingHistory ratingResult: " + ratingResult);
     	
+    	/** 更新list **/
     	ratingHistoryList.add(ratingResult);
+    	
+    	/** 新增/更新DB資料 **/
     	
         /** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
     	String RatingHistoryListResult = getRatingHistoryListOutput();
@@ -54,7 +57,7 @@ public class MessageBrokerController {
     	Util.getConsoleLogger().info("triggerInit input aMsg: " + aMsg);
     	
         // 通知圖片紀錄
-        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(MessageBrokerUtil.CHANNEL_fileUploaded, FileUploadUtil.lastFileUrl);
+        this.utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_fileUploaded, FileUploadUtil.lastPic);
         
         // 通知評論紀錄
         String RatingHistoryListResult = getRatingHistoryListOutput();

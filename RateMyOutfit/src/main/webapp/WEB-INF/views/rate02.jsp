@@ -37,7 +37,9 @@ body, html {
 
 .bg {
     /* The image used */
-    background-image: url("img/bg_stripe_dotline.jpg");
+/*     background-image: url("img/bg_stripe_dotline.jpg"); */
+/*     background-image: url("img/bg_dots.png"); */
+		background-image: url("img/bg_stripes_texture.jpg");
 
     /* Full height */
     height: 100%; 
@@ -139,7 +141,8 @@ label {
 	<!-- 標題 -->
 	<div class="row no-gutter" style="border-bottom: 1px solid #c0c0c0; width: 100%;"> <!-- width: 100% 讓螢幕寬度符合螢幕大小 -->
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
-			<h3>Rate My Outfit</h3>
+			<h3>          </h3>
+<!-- 			<h3>Rate My Outfit</h3> -->
 		</div>
 	</div>
 
