@@ -108,35 +108,4 @@ public class Util {
 		private static final Logger pressureTestFileLogger = LogManager.getLogger("util.pressureTestFileLogger");
 		
 	}
-	
-	//Base64 加密
-    public static String getEncryptedAsBase64Encode(String value) throws UnsupportedEncodingException{
-        Base64.Encoder encoder = Base64.getEncoder();
-        byte[] valueByte = value.getBytes("UTF-8");
-        value = encoder.encodeToString(valueByte);
-        value = "@"+value+"@";
-        return value;
-    }
-    
-    //Base64 解密
-    public static String getEncryptedAsBase64Decode(String value) throws UnsupportedEncodingException{
-        Matcher match = Pattern.compile("@+[\\x00-\\x7F]+@").matcher(value);
-        while(match.find()){
-            String matchers = match.group();
-            matchers = matchers.replaceAll("@", "");
-            Base64.Decoder decoder = Base64.getDecoder();
-            byte[] valueByte = matchers.getBytes("UTF-8");
-            String decodevalue = new String(decoder.decode(valueByte));
-            value = value.replaceAll(matchers, decodevalue);
-        }
-        return value;
-    }
-    
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Pic getUpdatedPic(long picId){
-    	/** 抓取最新的Pic **/
-    	Pic afterRatingPic = this.picRepository.findOne(picId);
-    	return afterRatingPic;
-    }
-    
 }
