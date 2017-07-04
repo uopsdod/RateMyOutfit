@@ -132,7 +132,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 						<form id='formRatingHistory' name='formName' action="/">
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/go_die.png" border="0" alt="Submit" width="84" height="84" value="20" wordsToShow="可以去死一死了"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/mirror.png" border="0" alt="Submit" width="84" height="84" value="20" wordsToShow="有人送你一面鏡子"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/ghost.png" border="0" alt="Submit" width="84" height="84" value="40" wordsToShow="看到鬼"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/misery.png" border="0" alt="Submit" width="84" height="84" value="60" wordsToShow="慘"></button>
 					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/nerdy.png" border="0" alt="Submit" width="84" height="84" value="80" wordsToShow="宅"></button>

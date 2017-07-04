@@ -49,7 +49,7 @@ public class Pic extends Common{
 //    public Set<Rate> rateList;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "ratePic")
-    private Set<Rate> rateList;
+    private List<Rate> rateList;
 
 	public Long getPicId() {
 		return picId;
@@ -104,11 +104,11 @@ public class Pic extends Common{
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	public Set<Rate> getRateList() {
+	public List<Rate> getRateList() {
 		return rateList;
 	}
 
-	public void setRateList(Set<Rate> rateList) {
+	public void setRateList(List<Rate> rateList) {
 		this.rateList = rateList;
 	}
 	

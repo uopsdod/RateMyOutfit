@@ -95,7 +95,7 @@ function updateRatingHistoryPage(ratingResultList, rateNum, rateResult){
     	var ratingResultObj = ratingResultList[i];
     	var ratingResult = ratingResultObj.rateResult;
     	console.log("ratingResult: " + ratingResult);
-    	result += ratingResult + "<br>";
+    	result = ratingResult + "<br>" + result; // 讓最新資料在最上面
     }
 //    
 //	for (i = 0; i < ratingHistoryList.length; i++) {
