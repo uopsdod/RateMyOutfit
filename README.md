@@ -13,6 +13,6 @@
 
 **Database**: Oracle XE
 
-**Design pattern**: Spring Boot, MVC, RESTful, Messgae Broker, ORM
+**Design pattern**: MVC, RESTful, Messgae Broker, ORM, Spring boot
 
 **Model**: Spring JPA with Hibernate
