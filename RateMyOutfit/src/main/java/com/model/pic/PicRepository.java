@@ -1,4 +1,4 @@
-package com.model.picture;
+package com.model.pic;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

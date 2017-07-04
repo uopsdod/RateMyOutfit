@@ -35,7 +35,10 @@ function connect() {
         	var dataJson = jQuery.parseJSON(data.body);
         	console.log("connect() fileUploaded - dataJson: " , dataJson);
         	console.log("connect() fileUploaded - dataJson.picUrl: " , dataJson.picUrl);
-        	updateProfilePage(dataJson.picUrl);
+        	console.log("connect() fileUploaded - dataJson.picId: " , dataJson.picId);
+        	if (dataJson.picUrl != undefined){
+        		updateProfilePage(dataJson.picUrl, dataJson.picId);
+        	}
         	
 //        	updateRatingHistoryPage(data.body);
         	
@@ -55,11 +58,28 @@ function triggerInit() {
 	stompClient.send("/app/triggerInit", {}, JSON.stringify({'triggerInit': 'triggerInitText'}));
 }
 
-function triggerRatingHistoryBroadcast(aRatingResult) {
+function triggerRatingHistoryBroadcast(aWordsToShow, aPicId, aScore) {
 //    stompClient.send("/app/triggerRatingHistoryBroadcast", "SomeText");
 //    stompClient.send("/app/triggerRatingHistoryBroadcast", "SomeText");
 //	stompClient.send("/app/hello", {}, JSON.stringify({'name': 'nameContent'}));
-	stompClient.send("/app/triggerRatingHistoryBroadcast", {}, JSON.stringify({'ratingResult': aRatingResult}));
+	
+	if (aPicId == undefined){
+		console.log("picId not provided");
+		return;
+	}
+	
+	var data = {
+			wordsToShow : aWordsToShow,
+			picId : aPicId,
+			score : aScore
+	}
+	
+    $.post("updatePic",data,
+    	    function(data, status){
+    	        console.log("updatePic - Data: " , data , "\nStatus: " , status);
+    	    });
+	
+//	stompClient.send("/app/triggerRatingHistoryBroadcast", {}, JSON.stringify(data));
 }
 
 function updateRatingHistoryPage(ratingResult){
@@ -78,14 +98,19 @@ function updateRatingHistoryPage(ratingResult){
 	document.getElementById("historyRatingResult").innerHTML = result;	
 }
 
-function updateProfilePage(picUrl){
+function updateProfilePage(picUrl, picId){
 //    console.log("check file Data: " + data + "\nStatus: " + status);
 	console.log("updateProfilePage - currFileName: " + currFileName);
 	console.log("updateProfilePage - picUrl: " + picUrl);
+	console.log("updateProfilePage - picId: " + picId);
     if (currFileName != picUrl){
     	currFileName = picUrl;
-    	document.getElementById("mainPic").src = picUrl;
+    	$("#mainPic")[0].src = picUrl;
     	console.log("updateProfilePage - updated mainPic");
+    	
+    	/** 將picId放上頁面,以後更新使用 **/
+    	$("#mainPic")[0].picId = picId;
+    	
     }
 }
 
@@ -226,11 +251,13 @@ $(document).ready(function(){
     
     // 一次設定全部onClick事件
     $("[name=triggerRatingHistoryBroadcast]").click(function() { 
-    	console.log("triggerRatingHistoryBroadcast" + this.value);
+    	console.log("triggerRatingHistoryBroadcast this.value: " + this.value);
+    	console.log("triggerRatingHistoryBroadcast this.getAttribute('wordsToShow'): " + this.getAttribute('wordsToShow'));
+    	var picId = $("#mainPic")[0].picId;
 //    	console.log($( "#triggerRatingHistoryBroadcast" )[0].value);
 //    	console.log($( "#triggerRatingHistoryBroadcast" ).val());
 //    	var contents = $('#contents')[0];
-    	triggerRatingHistoryBroadcast(this.value); 
+    	triggerRatingHistoryBroadcast(this.getAttribute('wordsToShow'), picId, this.value); 
     });
     
     $("#guestSignin").click(function() {

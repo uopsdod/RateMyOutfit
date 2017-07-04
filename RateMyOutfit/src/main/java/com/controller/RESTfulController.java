@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -15,8 +17,9 @@ import com.model.common.CommonVO;
 import com.model.customer.CustomerRepository;
 import com.model.mem.Mem;
 import com.model.mem.MemRepository;
-import com.model.picture.Pic;
-import com.model.picture.PicRepository;
+import com.model.pic.Pic;
+import com.model.pic.PicRepository;
+import com.util.MessageBrokerUtil;
 import com.util.RESTfulUtil;
 import com.util.Util;
 
@@ -32,6 +35,12 @@ public class RESTfulController {
 
     @Autowired
     PicRepository picRepository;
+    
+    @Autowired
+    MessageBrokerUtil utilWebOSocketMsgBroker;
+    
+ // use db decouple this later on
+    public static List<String> ratingHistoryList = new ArrayList<>();
 	
     @PostMapping("/login")
     public Mem login(@RequestParam(value="account", required=true) String account
@@ -71,7 +80,50 @@ public class RESTfulController {
     }
     
     @PostMapping("/updatePic")
-    public Pic giveRating(@RequestParam(value="ratingNumber", required=true) String ratingNumberd) {
-    	return null;
+    public Pic giveRating(@RequestParam(value="picId", required=true) long picId
+    					,@RequestParam(value="score", required=true) long score
+    					,@RequestParam(value="wordsToShow", required=true) String wordsToShow) {
+    	Util.getConsoleLogger().info(TAG + "/updatePic starts");
+    	Util.getConsoleLogger().info(TAG + "/updatePic input picId: " + picId);
+    	Util.getConsoleLogger().info(TAG + "/updatePic input score: " + score);
+    	Util.getConsoleLogger().info(TAG + "/updatePic input wordsToShow: " + wordsToShow);
+    	
+    	/** 更新list **/
+    	ratingHistoryList.add(wordsToShow);
+    	
+    	/** 先抓取舊資料 **/
+    	Pic pic = picRepository.findOne(picId);
+    	if (pic == null){
+    		Util.getFileLogger().info("/updatePic - picId: " + picId + " not found in Pic table");
+    	}
+    	
+    	/** 更新bean **/
+    	long rateNum = pic.getRateNum() + 1;
+    	long rateResult = (pic.getRateResult()*pic.getRateNum() + score)/(pic.getRateNum() + 1);
+    	pic.setRateNum(rateNum);
+    	pic.setRateResult(rateResult);
+    	
+    	/** 進行DB更新 **/
+    	Pic newPic = picRepository.save(pic); // update
+    	
+    	Util.getConsoleLogger().info(TAG + "/updatePic output ");
+    	Util.getConsoleLogger().info(TAG + "/updatePic ends");
+    	
+    	/** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
+    	String RatingHistoryListResult = getRatingHistoryListOutput();
+    	
+    	/** 告知訂閱client們 **/
+    	utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, RatingHistoryListResult);
+    	
+    	return newPic;
     }
+    
+    public static String getRatingHistoryListOutput(){
+        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
+        Collections.reverse(tmpRatingHistoryList);
+        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
+        Util.getConsoleLogger().info("ratingHistory() - getRatingHistoryListOutput() input RatingHistoryListResult: " + RatingHistoryListResult);
+        return RatingHistoryListResult;
+    }
+    
 }

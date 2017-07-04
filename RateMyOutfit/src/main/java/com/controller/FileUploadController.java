@@ -26,8 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
 import com.model.mem.Mem;
-import com.model.picture.Pic;
-import com.model.picture.PicRepository;
+import com.model.pic.Pic;
+import com.model.pic.PicRepository;
 import com.util.Util;
 import com.util.FileUploadUtil;
 import com.util.MessageBrokerUtil;
@@ -61,7 +61,7 @@ public class FileUploadController {
      * @return
      * @throws IOException 
      */
-    @PostMapping("/")
+    @PostMapping("/uploadFile")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) throws IOException {
     	/** 將file存入 **/

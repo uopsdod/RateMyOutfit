@@ -8,8 +8,6 @@
 <meta http-equiv="expires" content="0">
 <title>Rate My Outfit</title>
 <!-- bootstrap v3.3.6 -->
-<!-- <script src="js/jquery.min.js"></script> -->
-<!-- <script src="js/jquery-3.2.1.js"></script> -->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <link href="boostrap/bootstrap.css" rel="stylesheet" />
 <link href="boostrap/bootstrap-theme.css" rel="stylesheet" />
@@ -96,45 +94,6 @@ label {
    /* Style as you please, it will become the visible UI component. */
 }
 
-/* #upload-photo { */
-/*     cursor: inherit; */
-/*     display: block; */
-/*     font-size: 999px; */
-/*     filter: alpha(opacity=0); */
-/*     min-height: 100%; */
-/*     min-width: 100%; */
-/*     opacity: 0; */
-/*     position: absolute; */
-/*     right: 0; */
-/*     text-align: right; */
-/*     top: 0; */
-
-
-/* /*     font-size: 1.25em; */ */
-/* /*     font-weight: 700; */ */
-/* /*     color: white; */ */
-/* /*     background-color: black; */ */
-/* /*     display: inline-block; */ */
-    
-/* /*    opacity: 0; */ */
-/* /*    position: absolute; */ */
-/* /*    z-index: -1; */ */
-   
-/* /* 	position: absolute; */ */
-/* /*     top: 0; */ */
-/* /*     right: 0; */ */
-/* /*     min-width: 100%; */ */
-/* /*     min-height: 100%; */ */
-/* /*     font-size: 100px; */ */
-/* /*     text-align: right; */ */
-/* /*     filter: alpha(opacity=0); */ */
-/* /*     opacity: 0; */ */
-/* /*     outline: none; */ */
-/* /*     background: white; */ */
-/* /*     cursor: inherit; */ */
-/* /*     display: block; */ */
-/* } */
-
 </style>
 </head>
 <body class="bg">
@@ -183,7 +142,7 @@ label {
 <!-- 					<b>使用者</b>: <span id="username">尚未登入</span><br> -->
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">	
-					<form id="formUploadFile" method="POST" enctype="multipart/form-data" action="/">
+					<form id="formUploadFile" method="POST" enctype="multipart/form-data" action="/uploadFile">
 						<table>
 							<tr><b>上傳圖片</b>:</tr>
 							<tr><td></td>
@@ -237,11 +196,11 @@ label {
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container center" style="padding-top: 20px;">
 						<form id='formRatingHistory' name='formName' action="/">
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/go_die.png" border="0" alt="Submit" width="84" height="84" value="可以去死一死了"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/ghost.png" border="0" alt="Submit" width="84" height="84" value="看見鬼"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/misery.png" border="0" alt="Submit" width="84" height="84" value="慘"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/nerdy.png" border="0" alt="Submit" width="84" height="84" value="宅"></button>
-					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/good.png" border="0" alt="Submit" width="84" height="84" value="讚"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/go_die.png" border="0" alt="Submit" width="84" height="84" value="20" wordsToShow="可以去死一死了"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/ghost.png" border="0" alt="Submit" width="84" height="84" value="40" wordsToShow="看到鬼"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/misery.png" border="0" alt="Submit" width="84" height="84" value="60" wordsToShow="慘"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/nerdy.png" border="0" alt="Submit" width="84" height="84" value="80" wordsToShow="宅"></button>
+					        <input name="triggerRatingHistoryBroadcast" type="image"  src="img/good.png" border="0" alt="Submit" width="84" height="84" value="100" wordsToShow="讚"></button>
 					        
 					        <!-- test -->
 <!-- 					        <input id="initTest" type="button" value="init"></button> -->

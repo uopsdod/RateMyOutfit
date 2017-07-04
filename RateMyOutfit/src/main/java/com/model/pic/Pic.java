@@ -1,4 +1,4 @@
-package com.model.picture;
+package com.model.pic;
 
 import java.util.Date;
 
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -85,5 +87,9 @@ public class Pic {
 		this.picUrl = picUrl;
 	}   
     
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
     
 }

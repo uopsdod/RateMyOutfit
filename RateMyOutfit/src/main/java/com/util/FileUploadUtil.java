@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import com.controller.BasicController;
 import com.controller.FileUploadController;
-import com.model.picture.Pic;
+import com.model.pic.Pic;
 import com.util.storage.StorageService;
 
 @Component
