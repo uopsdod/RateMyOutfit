@@ -144,7 +144,7 @@ public class FileUploadController {
 //      
 //      Util.getConsoleLogger().info("listUploadedFiles() ends");
 //      
-//      return "rate02";
+//      return "main_page";
 ////      return "uploadForm";
 //  }
 }

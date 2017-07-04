@@ -26,16 +26,6 @@ import com.util.storage.StorageService;
 @EnableConfigurationProperties(StorageProperties.class)
 public class BeanGenerator {
 	
-	private Map<String, String> mapProp;
-	
-	public Map<String, String> getMapProp() {
-		return mapProp;
-	}
-
-	public void setMapProp(Map<String, String> mapProp) {
-		this.mapProp = mapProp;
-	}
-	
 	/**
 	 * gson instance
 	 * @return
@@ -72,8 +62,6 @@ public class BeanGenerator {
 	@Bean(name="Util")
 	public Util util(Gson aGson, PicRepository picRepository){
 		Util util = new Util(aGson, picRepository);
-		Util.getSystemParam().putAll(mapProp);
-		Util.getConsoleLogger().info("BeanGenerator - mapProp: " + mapProp);
 		return util;
 	}
 	

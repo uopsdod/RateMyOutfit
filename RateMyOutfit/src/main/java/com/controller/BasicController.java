@@ -30,13 +30,13 @@ public class BasicController {
     @RequestMapping("/")
     public String mainPage(Map<String, String> model) {
     	model.put("message", "hello");
-    	return "rate02";
+    	return "main_page";
     }
     
-	@RequestMapping("/rate02")
-	public String rate02(Map<String, String> model) {
+	@RequestMapping("/main_page")
+	public String main_page(Map<String, String> model) {
 		model.put("message", "hello");
-		return "rate02";
+		return "main_page";
 	}
     
 }
