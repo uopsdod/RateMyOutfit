@@ -71,15 +71,15 @@ public class SpringTestRunner implements CommandLineRunner{
 //        System.out.println("Done!");
 		
 		// JWT - generate
-		String jwt = RESTfulUtil.createJWT();
-		Util.getConsoleLogger().info("TestSender - jwt: " + jwt);
-		
-		RESTfulUtil.parseJWT(jwt);
-		
-		jwt = RESTfulUtil.createJWT();;
-		Util.getConsoleLogger().info("TestSender - jwt: " + jwt);
-		
-		RESTfulUtil.parseJWT(jwt);
+//		String jwt = RESTfulUtil.createJWT();
+//		Util.getConsoleLogger().info("TestSender - jwt: " + jwt);
+//		
+//		RESTfulUtil.parseJWT(jwt);
+//		
+//		jwt = RESTfulUtil.createJWT();;
+//		Util.getConsoleLogger().info("TestSender - jwt: " + jwt);
+//		
+//		RESTfulUtil.parseJWT(jwt);
 		
 		
         Util.getConsoleLogger().info("TestSender - CommandLineRunner() called - 結束測試");

@@ -3,6 +3,11 @@ package com.model.common;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 給各個Entity繼承使用
+ * @author sam
+ *
+ */
 public class Common {
 	private List<String> errorMsgs;
 	private String jwtStr;
