@@ -20,7 +20,10 @@ function connect() {
         	console.log("connect() ratingHistory - data.body: " + data.body);
         	console.log("connect() ratingHistory - data.body: " , data.body);
         	
-        	updateRatingHistoryPage(data.body);
+        	var dataJson = jQuery.parseJSON(data.body);
+        	
+        	updateRatingHistoryPage(dataJson.rateList, dataJson.rateNum, dataJson.rateResult);
+//        	updateRatingHistoryPage(data.body);
         	
 //            showGreeting(JSON.parse(data.body).content);
         });
@@ -77,25 +80,42 @@ function triggerRatingHistoryBroadcast(aWordsToShow, aPicId, aScore) {
     $.post("updatePic",data,
     	    function(data, status){
     	        console.log("updatePic - Data: " , data , "\nStatus: " , status);
+//    	        updateRatingHistoryPage(data.rateList, data.rateNum, date.rateResult);
     	    });
 	
 //	stompClient.send("/app/triggerRatingHistoryBroadcast", {}, JSON.stringify(data));
 }
 
-function updateRatingHistoryPage(ratingResult){
-    var ratingHistoryList = ratingResult.split(",");
+function updateRatingHistoryPage(ratingResultList, rateNum, rateResult){
+//    var ratingHistoryList = ratingResult.split(",");
     var i;
     var result = "";
-	for (i = 0; i < ratingHistoryList.length; i++) {
-		console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
-		console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
-	
-		result += ratingHistoryList[i].trim() + "<br>";
-// 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
-// 		                                                                 = "visible";
-	}
+    /** 更新ratingHistory **/
+    for(var i in ratingResultList){
+    	var ratingResultObj = ratingResultList[i];
+    	var ratingResult = ratingResultObj.rateResult;
+    	console.log("ratingResult: " + ratingResult);
+    	result += ratingResult + "<br>";
+    }
+//    
+//	for (i = 0; i < ratingHistoryList.length; i++) {
+//		console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
+//		console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
+//	
+//		result += ratingHistoryList[i].trim() + "<br>";
+//// 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
+//// 		                                                                 = "visible";
+//	}
 	console.log("result: " + result);
 	document.getElementById("historyRatingResult").innerHTML = result;	
+	
+	/** 更新總評分人數 **/
+	$("#rateNum")[0].innerHTML = rateNum;
+	
+	/** 更新平均分數 **/
+	$("#rateResult")[0].innerHTML = rateResult;
+	
+	
 }
 
 function updateProfilePage(picUrl, picId){

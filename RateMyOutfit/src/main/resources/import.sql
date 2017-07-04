@@ -1,7 +1,4 @@
-INSERT INTO "CUSTOMER" (ID, NAME, EMAIL, CREATED_DATE) VALUES(1, 'mkyong','111@yahoo.com', TO_DATE('2017-02-11', 'yyyy-mm-dd'));
-INSERT INTO "CUSTOMER" (ID, NAME, EMAIL, CREATED_DATE) VALUES(2, 'yflow','222@yahoo.com', TO_DATE('2017-02-12', 'yyyy-mm-dd'));
-INSERT INTO "CUSTOMER" (ID, NAME, EMAIL, CREATED_DATE) VALUES(3, 'zilap','333@yahoo.com', TO_DATE('2017-02-13', 'yyyy-mm-dd'));
-
 INSERT INTO "MEM" (MEM_ID, MEM_NAME, MEM_ACCOUNT, MEM_PWD, CREATED_DATE) VALUES(1, 'samTsai','sam', '1111' ,TO_DATE('2017-02-13', 'yyyy-mm-dd'));
+INSERT INTO "MEM" (MEM_ID, MEM_NAME, MEM_ACCOUNT, MEM_PWD, CREATED_DATE) VALUES(2, 'guest','guest', 'guest' ,TO_DATE('2000-01-01', 'yyyy-mm-dd'));
 
 

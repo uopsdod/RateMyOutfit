@@ -8,17 +8,21 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.common.CommonVO;
-import com.model.customer.CustomerRepository;
+import com.model.common.Common;
 import com.model.mem.Mem;
 import com.model.mem.MemRepository;
 import com.model.pic.Pic;
 import com.model.pic.PicRepository;
+import com.model.rate.Rate;
+import com.model.rate.RateRepository;
+import com.util.FileUploadUtil;
 import com.util.MessageBrokerUtil;
 import com.util.RESTfulUtil;
 import com.util.Util;
@@ -35,6 +39,12 @@ public class RESTfulController {
 
     @Autowired
     PicRepository picRepository;
+    
+    @Autowired
+    RateRepository rateRepository;
+    
+    @Autowired
+    Util util;
     
     @Autowired
     MessageBrokerUtil utilWebOSocketMsgBroker;
@@ -103,8 +113,18 @@ public class RESTfulController {
     	pic.setRateNum(rateNum);
     	pic.setRateResult(rateResult);
     	
-    	/** 進行DB更新 **/
+    	/** 進行Pic Table更新 **/
     	Pic newPic = picRepository.save(pic); // update
+    	
+    	/** 進行Rate Table更新 **/
+    	Rate rate = new Rate();
+    	rate.setRatePic(newPic);
+    	rate.setRateResult(wordsToShow);
+    	
+    	Rate newRate = rateRepository.save(rate);
+    	
+    	/** 加上原本最新的Rate **/
+    	newPic.getRateList().add(newRate);
     	
     	Util.getConsoleLogger().info(TAG + "/updatePic output ");
     	Util.getConsoleLogger().info(TAG + "/updatePic ends");
@@ -113,10 +133,16 @@ public class RESTfulController {
     	String RatingHistoryListResult = getRatingHistoryListOutput();
     	
     	/** 告知訂閱client們 **/
-    	utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, RatingHistoryListResult);
+    	newPic.setPicFile(null); // 更新不需要再將圖檔傳給前端
+    	utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, newPic);
+    	
+    	/** 更新當下Pic物件 **/
+    	FileUploadUtil.lastPic = newPic;
     	
     	return newPic;
     }
+    
+
     
     public static String getRatingHistoryListOutput(){
         List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);

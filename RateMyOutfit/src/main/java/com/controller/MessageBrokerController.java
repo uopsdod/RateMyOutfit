@@ -44,7 +44,7 @@ public class MessageBrokerController {
         
         // 通知評論紀錄
         String RatingHistoryListResult = RESTfulController.getRatingHistoryListOutput();
-        this.utilWebOSocketMsgBroker.sendMsgToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, RatingHistoryListResult);
+        this.utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, FileUploadUtil.lastPic);
         
         Util.getConsoleLogger().info("triggerInit ends");
         return "";

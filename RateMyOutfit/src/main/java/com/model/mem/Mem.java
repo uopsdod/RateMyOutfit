@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.model.common.CommonVO;
+import com.model.common.Common;
 
 import java.util.Date;
 
 @Entity
-public class Mem extends CommonVO{
+public class Mem extends Common{
 
     //http://www.oracle.com/technetwork/middleware/ias/id-generation-083058.html
     @Id

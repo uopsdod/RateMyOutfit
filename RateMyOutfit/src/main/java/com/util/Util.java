@@ -20,11 +20,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.model.pic.Pic;
+import com.model.pic.PicRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -41,10 +45,13 @@ public class Util {
 	
 	private static Gson gson;
 	
-	public Util(Gson aGson){
+	PicRepository picRepository;
+	
+	public Util(Gson aGson, PicRepository picRepository){
 		Util.getFileLogger().info("Util() start");
 		Util.gson = aGson;
 		Util.getFileLogger().info("Util() end");
+		this.picRepository = picRepository;
 	}	
 	
 	public static String getSdfDateFormat(){
@@ -123,6 +130,13 @@ public class Util {
             value = value.replaceAll(matchers, decodevalue);
         }
         return value;
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Pic getUpdatedPic(long picId){
+    	/** 抓取最新的Pic **/
+    	Pic afterRatingPic = this.picRepository.findOne(picId);
+    	return afterRatingPic;
     }
     
 }

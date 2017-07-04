@@ -3,13 +3,13 @@ package com.model.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonVO {
+public class Common {
 	private List<String> errorMsgs;
 	private String jwtStr;
 	public List<String> getErrorMsgs() {
 		return errorMsgs;
 	}
-	protected CommonVO(){
+	protected Common(){
 		this.errorMsgs = new ArrayList<>();
 	}
 	

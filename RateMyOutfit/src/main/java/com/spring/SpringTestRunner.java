@@ -14,8 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonObject;
-import com.model.customer.Customer;
-import com.model.customer.CustomerRepository;
 import com.util.RESTfulUtil;
 import com.util.Util;
 import com.util.MessageBrokerUtil;
@@ -30,9 +28,6 @@ public class SpringTestRunner implements CommandLineRunner{
 
     @Autowired
     DataSource dataSource;
-
-    @Autowired
-    CustomerRepository customerRepository;
 
     @Transactional(readOnly = true)
     @Override

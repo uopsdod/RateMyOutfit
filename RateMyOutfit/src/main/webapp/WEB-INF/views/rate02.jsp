@@ -7,6 +7,11 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <title>Rate My Outfit</title>
+
+
+<link href="css/main.css" rel="stylesheet" />
+
+
 <!-- bootstrap v3.3.6 -->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <link href="boostrap/bootstrap.css" rel="stylesheet" />
@@ -25,76 +30,7 @@
 <link href="css/login_form.css" rel="stylesheet" />
 
 <script src="js/main.js"></script>
-</script>
 
-<style>
-body, html {
-    height: 100%;
-    margin: 0;
-}
-
-.bg {
-    /* The image used */
-/*     background-image: url("img/bg_stripe_dotline.jpg"); */
-/*     background-image: url("img/bg_dots.png"); */
-		background-image: url("img/bg_stripes_texture.jpg");
-
-    /* Full height */
-    height: 100%; 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
-.center {
-	margin: auto;
-	text-align: center;
-}
-
-.left {
-	margin: auto;
-	text-align: left;
-}
-
-/* .chatDialogue{ */
-/* 	max-height:100px; */
-/* } */
-
-.nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
-}
-
-/* html, body {height: 100%;} */
-
-.chatmaxHeight
-{
-    height: 400px;
-}
-.logmaxHeight
-{
-    height: 470px;
-}​
-
-.hidden
-{
-	visibility: hidden;
-}
-form, table {
-     display:inline;
-     margin:0px;
-     padding:0px;
-}
-
-label {
-   cursor: pointer;
-   /* Style as you please, it will become the visible UI component. */
-}
-
-</style>
 </head>
 <body class="bg">
 	<!-- 標題 -->
@@ -174,11 +110,11 @@ label {
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container" style="padding-top: 20px;">
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						平均分數:
-						<span class="input-xlarge uneditable-input">99.1</span>
+						<span id="rateResult" class="input-xlarge uneditable-input">99.1</span>
 					</div>						
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						總評分人數:
-						<span class="input-xlarge uneditable-input">2</span>
+						<span id="rateNum" class="input-xlarge uneditable-input">2</span>
 					</div>						
 <!-- 					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"> -->
 <!-- 						<button class="btn btn-primary btn-sm" id="sendToRoom" onclick="sendtoRoom();">SEND</button> -->

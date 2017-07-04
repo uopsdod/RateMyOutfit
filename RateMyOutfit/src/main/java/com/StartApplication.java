@@ -19,8 +19,6 @@ import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.model.customer.Customer;
-import com.model.customer.CustomerRepository;
 import com.util.Util;
 
 @SpringBootApplication
