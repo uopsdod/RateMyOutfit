@@ -24,9 +24,6 @@ public class MessageBrokerController {
 	
 	private MessageBrokerUtil utilWebOSocketMsgBroker;
 	
-    // use db decouple this later on
-    public static List<String> ratingHistoryList = new ArrayList<>();	
-	
     @Autowired
     public MessageBrokerController(MessageBrokerUtil utilWebOSocketMsgBroker) {
     	System.out.println("MessageBrokerController() called");
@@ -43,19 +40,9 @@ public class MessageBrokerController {
         this.utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_fileUploaded, FileUploadUtil.lastPic);
         
         // 通知評論紀錄
-        String RatingHistoryListResult = RESTfulController.getRatingHistoryListOutput();
         this.utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, FileUploadUtil.lastPic);
         
         Util.getConsoleLogger().info("triggerInit ends");
         return "";
-    }
-    
-    
-    public static String getRatingHistoryListOutput(){
-        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
-        Collections.reverse(tmpRatingHistoryList);
-        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
-        Util.getConsoleLogger().info("ratingHistory() - getRatingHistoryListOutput() input RatingHistoryListResult: " + RatingHistoryListResult);
-        return RatingHistoryListResult;
     }
 }

@@ -118,6 +118,7 @@ public class FileUploadController {
         return ResponseEntity.notFound().build();
     }
 
+// 先留下此段註解,作為以後reference使用
 //  /**
 //   * All files are cached in storageService
 //   * If you type "/" you'll be redirected to "uploadForm"(jsp) and a list of file pathes will be put in thymeleaf with the key "files"

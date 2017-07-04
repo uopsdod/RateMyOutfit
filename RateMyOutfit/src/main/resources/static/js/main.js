@@ -23,9 +23,6 @@ function connect() {
         	var dataJson = jQuery.parseJSON(data.body);
         	
         	updateRatingHistoryPage(dataJson.rateList, dataJson.rateNum, dataJson.rateResult);
-//        	updateRatingHistoryPage(data.body);
-        	
-//            showGreeting(JSON.parse(data.body).content);
         });
         
         // subscribe 2 - 
@@ -42,10 +39,6 @@ function connect() {
         	if (dataJson.picUrl != undefined){
         		updateProfilePage(dataJson.picUrl, dataJson.picId);
         	}
-        	
-//        	updateRatingHistoryPage(data.body);
-        	
-//            showGreeting(JSON.parse(data.body).content);
         });
         
         // 檢查是否有要更新資訊  (觸發init)
@@ -62,9 +55,6 @@ function triggerInit() {
 }
 
 function triggerRatingHistoryBroadcast(aWordsToShow, aPicId, aScore) {
-//    stompClient.send("/app/triggerRatingHistoryBroadcast", "SomeText");
-//    stompClient.send("/app/triggerRatingHistoryBroadcast", "SomeText");
-//	stompClient.send("/app/hello", {}, JSON.stringify({'name': 'nameContent'}));
 	
 	if (aPicId == undefined){
 		console.log("picId not provided");
@@ -80,32 +70,20 @@ function triggerRatingHistoryBroadcast(aWordsToShow, aPicId, aScore) {
     $.post("updatePic",data,
     	    function(data, status){
     	        console.log("updatePic - Data: " , data , "\nStatus: " , status);
-//    	        updateRatingHistoryPage(data.rateList, data.rateNum, date.rateResult);
     	    });
 	
-//	stompClient.send("/app/triggerRatingHistoryBroadcast", {}, JSON.stringify(data));
 }
 
 function updateRatingHistoryPage(ratingResultList, rateNum, rateResult){
 //    var ratingHistoryList = ratingResult.split(",");
-    var i;
-    var result = "";
     /** 更新ratingHistory **/
+	var result = "";
     for(var i in ratingResultList){
     	var ratingResultObj = ratingResultList[i];
     	var ratingResult = ratingResultObj.rateResult;
     	console.log("ratingResult: " + ratingResult);
     	result = ratingResult + "<br>" + result; // 讓最新資料在最上面
     }
-//    
-//	for (i = 0; i < ratingHistoryList.length; i++) {
-//		console.log("ratingHistoryList[i]: " + ratingHistoryList[i]);
-//		console.log("ratingHistoryList[i].trim(): " + ratingHistoryList[i].trim());
-//	
-//		result += ratingHistoryList[i].trim() + "<br>";
-//// 		    document.getElementById("updateAvailable_" + a[i]).style.visibility
-//// 		                                                                 = "visible";
-//	}
 	console.log("result: " + result);
 	document.getElementById("historyRatingResult").innerHTML = result;	
 	
@@ -119,7 +97,6 @@ function updateRatingHistoryPage(ratingResultList, rateNum, rateResult){
 }
 
 function updateProfilePage(picUrl, picId){
-//    console.log("check file Data: " + data + "\nStatus: " + status);
 	console.log("updateProfilePage - currFileName: " + currFileName);
 	console.log("updateProfilePage - picUrl: " + picUrl);
 	console.log("updateProfilePage - picId: " + picId);
@@ -132,10 +109,6 @@ function updateProfilePage(picUrl, picId){
     	$("#mainPic")[0].picId = picId;
     	
     }
-}
-
-function doLogin(){
-	
 }
 
 function checkIfJWTValid(aAccount, aPassword){
@@ -194,7 +167,7 @@ function checkIfJWTValid(aAccount, aPassword){
                 	
                 }
    });
-}
+}// end of checkIfJWTValid(...)
 
 $(document).ready(function(){
 	console.log("document ready");
@@ -203,6 +176,7 @@ $(document).ready(function(){
 //	$("#account").val("sam");
 //	$("#password").val("1111");
 	
+	/** 開啟登入lightbox **/
 	if (jwtStr == undefined){
 		console.log("jwtStr is empty");
 		
@@ -214,21 +188,9 @@ $(document).ready(function(){
 	            $('#loginDiv').find('#loginAccount').focus()
 	        }
 		});
-		
-//		var account = $("#account").val();
-//		var password = $("#password").val();
-		
-//		checkIfJWTValid(account, password);
 	}
 	
-//	
-//	if (!checkIfJWTValid()){
-//		
-//	}else{
-//	    // 直接連上server,建立stompClient
-//	    connect();
-//	}
-	
+	/** 註冊監聽事件 **/
     $("#formRatingHistory").on('submit', function (e) {
         e.preventDefault();
     });
@@ -248,12 +210,9 @@ $(document).ready(function(){
 //        data.append("CustomField", "This is some extra data, testing");
         
         $.ajax({
-//            type: "POST",
-//            data: $(this).serialize(),
             type: "POST",
             enctype: 'multipart/form-data',
             url : $(this).attr('action') || window.location.pathname,
-//            url: "/api/upload/multi",
             data: data,
             processData: false,
             contentType: false,
@@ -261,7 +220,6 @@ $(document).ready(function(){
 //            timeout: 600000,            
             success: function (data) {
             	console.log("formUploadFile data: " , data);
-//                $("#form_output").html(data);
             },
             error: function (jXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -295,14 +253,4 @@ $(document).ready(function(){
     	alert("抱歉,功能尚在開發中!");
     });
     
-    
-//    $( "#initTest" ).click(function() { triggerInit(); });
-    
-//    $( "#connect" ).click(function() { connect(); });
-//    $( "#disconnect" ).click(function() { disconnect(); });
-//    $( "#send" ).click(function() { sendName(); });
 });
-
-//$(function () {
-//
-//});

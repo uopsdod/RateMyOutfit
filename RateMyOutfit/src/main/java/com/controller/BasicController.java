@@ -39,17 +39,4 @@ public class BasicController {
 		return "rate02";
 	}
     
-    /*****************  for testing *******************/
-    
-    // for testing
-    @RequestMapping(value = "/stompTest", method = RequestMethod.GET)
-	public String stompTest(	        
-			Map<String, String> model,
-	        HttpServletRequest request, 
-	        HttpServletResponse response) throws IOException, ServletException {
-		Util.getConsoleLogger().info("stompTest() starts");
-		Util.getConsoleLogger().info("stompTest() ends");
-		return "stompTest";
-	}
-
 }

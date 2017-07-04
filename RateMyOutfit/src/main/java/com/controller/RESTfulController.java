@@ -42,16 +42,10 @@ public class RESTfulController {
     
     @Autowired
     RateRepository rateRepository;
-    
-    @Autowired
-    Util util;
-    
+
     @Autowired
     MessageBrokerUtil utilWebOSocketMsgBroker;
     
- // use db decouple this later on
-    public static List<String> ratingHistoryList = new ArrayList<>();
-	
     @PostMapping("/login")
     public Mem login(@RequestParam(value="account", required=true) String account
     						 ,@RequestParam(value="password", required=true) String password) {
@@ -98,9 +92,6 @@ public class RESTfulController {
     	Util.getConsoleLogger().info(TAG + "/updatePic input score: " + score);
     	Util.getConsoleLogger().info(TAG + "/updatePic input wordsToShow: " + wordsToShow);
     	
-    	/** 更新list **/
-    	ratingHistoryList.add(wordsToShow);
-    	
     	/** 先抓取舊資料 **/
     	Pic pic = picRepository.findOne(picId);
     	if (pic == null){
@@ -129,9 +120,6 @@ public class RESTfulController {
     	Util.getConsoleLogger().info(TAG + "/updatePic output ");
     	Util.getConsoleLogger().info(TAG + "/updatePic ends");
     	
-    	/** 加上評分歷史紀錄,並讓最新的評論在最上面 **/
-    	String RatingHistoryListResult = getRatingHistoryListOutput();
-    	
     	/** 告知訂閱client們 **/
     	newPic.setPicFile(null); // 更新不需要再將圖檔傳給前端
     	utilWebOSocketMsgBroker.sendJsonToTopicSubcriber(MessageBrokerUtil.CHANNEL_ratingHistory, newPic);
@@ -141,15 +129,4 @@ public class RESTfulController {
     	
     	return newPic;
     }
-    
-
-    
-    public static String getRatingHistoryListOutput(){
-        List<String> tmpRatingHistoryList = new ArrayList(ratingHistoryList);
-        Collections.reverse(tmpRatingHistoryList);
-        String RatingHistoryListResult = tmpRatingHistoryList.toString().substring(1, tmpRatingHistoryList.toString().length()-1);
-        Util.getConsoleLogger().info("ratingHistory() - getRatingHistoryListOutput() input RatingHistoryListResult: " + RatingHistoryListResult);
-        return RatingHistoryListResult;
-    }
-    
 }
